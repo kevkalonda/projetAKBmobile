@@ -23,7 +23,7 @@ const Reservation = () => {
 
 const styles = StyleSheet.create({
   baseText: {
-    fontFamily: "Cochin"
+    fontFamily:Platform.OS=="ios"? "Cochin":"sans-serif",
   },
   titleText: {
     fontSize: 20,

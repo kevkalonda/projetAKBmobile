@@ -23,7 +23,7 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
   baseText: {
-    fontFamily: "Cochin",
+    fontFamily:Platform.OS=="ios"? "Cochin":"sans-serif",
     justifyContent:"center"
   },
   titleText: {

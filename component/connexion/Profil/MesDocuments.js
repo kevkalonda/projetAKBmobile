@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, TextInput, StyleSheet,Image, Platform   } from 'react-native';
 
-export default function Connexion(props) {
+export default function MesSocument(props) {
     
     const inputAccessoryViewID = 'uniqueID';
     const initialText = '';
@@ -26,43 +26,8 @@ export default function Connexion(props) {
     }
     return (
         <View style={styles.container}>
-          <Image style={{height: Platform.OS=="ios"? 350: 200, width: Platform.OS=="ios"? 350: 200}} source={require('../assets/AKB_menu.png')} />
-            <TextInput
-            style={styles.top}
-            inputAccessoryViewID={inputAccessoryViewID}
-            onChangeText={setText}
-            value={text}
-            placeholder={'Please type here…'}
-            />
-        
-            <TextInput
-            style={styles.top}
-            inputAccessoryViewID={inputAccessoryViewID}
-            onChangeText={setText}
-            value={text}
-            placeholder={'Please type here…'}
-            />
-             
-            <TouchableOpacity style={styles.button} 
-                onPress={connexion}
-            >
-                <Text style={styles.textButton}>Connexion</Text>
-            </TouchableOpacity>
-            <View style={{marginTop:25, alignItems: 'center',}}>
-                <View style={{flexDirection: 'row'}}>
-                    <Text style={{color:"white"}}>Mot de passe oublier ? cliquez </Text>
-                    <TouchableOpacity class="hover:bg-sky-700"
-                    onPress={mdpOublier} >
-                        <Text style={{color:"#676767", fontWeight: "bold"}}> ici</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{marginTop:30, flexDirection: 'row'}}>
-                    <Text style={{fontSize: 20, color:"white"}}>Tu n'as pas de compte ? </Text>
-                    <TouchableOpacity class="hover:bg-sky-700"
-                    onPress={inscription} >
-                        <Text style={{fontSize: 20, color:"#676767", fontWeight: "bold"}}> S'inscrire</Text>
-                    </TouchableOpacity>
-                </View>
+            <View>
+                
             </View>
           <StatusBar style="auto" />
         </View>

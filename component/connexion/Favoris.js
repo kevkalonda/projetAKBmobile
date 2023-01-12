@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 
 const Favoris = () => {
   const [titleText, setTitleText] = useState("Favoris");
@@ -10,20 +10,16 @@ const Favoris = () => {
   };
 
   return (
-    <Text style={styles.baseText}>
-      <Text style={styles.titleText} onPress={onPressTitle}>
-        {titleText}
-        {"\n"}
-        {"\n"}
-      </Text>
-      <Text numberOfLines={5}>{bodyText}</Text>
-    </Text>
+    <View>
+      
+      <Text>Favoris</Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   baseText: {
-    fontFamily: "Cochin",
+    fontFamily:Platform.OS=="ios"? "Cochin":"sans-serif",
     justifyContent:"center"
   
   },

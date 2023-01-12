@@ -17,7 +17,7 @@ export default function Inscription(props) {
 
     return (
         <View style={styles.container}>
-            <Image style={{marginTop:5, width:200, height:200}} source={require('../assets/AKB_menu.png')} />
+            <Image style={{marginTop:5, width:Platform.OS=="ios"? 200: 150, height:Platform.OS=="ios"? 200: 150}} source={require('../assets/AKB_menu.png')} />
             <TextInput
             style={styles.top}
             inputAccessoryViewID={inputAccessoryViewID}
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderRadius:3,
       marginTop: 10,
-      padding:16,
+      padding:Platform.OS=="ios"?16:8,
     },
     input2:{
       width:'40%',
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderRadius:3,
       marginTop: 10,
-      padding:16,
+      padding:Platform.OS=="ios"?16:8,
       marginRight: 20,
       marginLeft:20,
     },
