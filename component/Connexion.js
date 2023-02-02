@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity, TextInput, StyleSheet, Image, Platform } from 'react-native';
 
 export default function Connexion(props) {
@@ -7,15 +7,64 @@ export default function Connexion(props) {
     const inputAccessoryViewID = 'uniqueID';
     const initialText = '';
 
-    const [showPass, setShowPass] = useState(false);
-    const [text, setText] = useState(initialText);
-    const [count, setCount] = useState(0);
+    const [compte, setCompte] = useState(initialText);
+    const [mdp, setMdp] = useState(initialText);
+
+
     const onPress = () => {
         alert("Connexion")
     };
 
-    const connexion = () => {
-        props.navigation.navigate("Home")
+    const connexion = async () => {
+        if (compte.length > 0 || mdp.length > 0) {
+            var data = {
+                email: compte,
+                mot_de_pass: mdp
+            }
+
+        
+            
+            var request = new XMLHttpRequest();
+            
+            request.onreadystatechange = e => {
+                if (request.readyState !== 4) {
+                    return;
+                }
+
+                if (request.status === 200) {
+
+                    alert(request.response);
+                    //console.log('success', request.responseText);
+                } else {
+                    //console.warn('error');
+                    alert("error")
+
+                }
+            };
+            request.open('GET', 'http://172.28.220.215:8083/allReservation');
+            request.send();
+
+            // const response = fetch('google.com', {
+            //     method: 'POST',
+            //     body: JSON.stringify({
+            //         email: 'test@gmail.com',
+            //         mot_de_pass: 'test',
+            //     }),
+            //   }).then(response => response.json() ).then(json => {
+            //     return json.movies;
+            //   })
+            //   .catch(error => {
+            //     console.error(error);
+            //   });
+
+            // if (response.status === 200) {
+            //     props.navigation.navigate("Home")
+            // } else {
+            //     alert("Adresse mail ou mot de passe incorrect")
+            // }
+        } else {
+            alert("Les deux champs sont obligatoires")
+        }
     }
 
     const inscription = () => {
@@ -30,17 +79,18 @@ export default function Connexion(props) {
             <TextInput
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
-                onChangeText={setText}
-                value={text}
-                placeholder={'Please type here…'}
+                onChangeText={setCompte}
+                value={compte}
+                placeholder={'Entrez votre mail'}
             />
 
             <TextInput
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
-                onChangeText={setText}
-                value={text}
-                placeholder={'Please type here…'}
+                onChangeText={setMdp}
+                value={mdp}
+                secureTextEntry={true}
+                placeholder={'Entrez votre mot de passe'}
             />
 
             <TouchableOpacity style={styles.button}
