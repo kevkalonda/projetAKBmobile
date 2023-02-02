@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from 'react';
-import { Text, View, TouchableOpacity, TextInput, StyleSheet, Image, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { Image, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function Connexion(props) {
 
@@ -18,50 +18,31 @@ export default function Connexion(props) {
     const connexion = async () => {
         if (compte.length > 0 || mdp.length > 0) {
             var data = {
-                email: compte,
-                mot_de_pass: mdp
+
+                "email": "test@gmail.com",
+                
+                }
+
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                     body: JSON.stringify({ email: compte,mot_de_pass:mdp })
+                };
+            
+            
+            
+   
+            fetch('http://192.168.90.152:8083/connexionUser', requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            if(data.statutTO==="user"){
+                props.navigation.navigate('Home')
+            }else{
+                alert("erreur connexion");
             }
+        });
 
-        
-            
-            var request = new XMLHttpRequest();
-            
-            request.onreadystatechange = e => {
-                if (request.readyState !== 4) {
-                    return;
-                }
 
-                if (request.status === 200) {
-
-                    alert(request.response);
-                    //console.log('success', request.responseText);
-                } else {
-                    //console.warn('error');
-                    alert("error")
-
-                }
-            };
-            request.open('GET', 'http://172.28.220.215:8083/allReservation');
-            request.send();
-
-            // const response = fetch('google.com', {
-            //     method: 'POST',
-            //     body: JSON.stringify({
-            //         email: 'test@gmail.com',
-            //         mot_de_pass: 'test',
-            //     }),
-            //   }).then(response => response.json() ).then(json => {
-            //     return json.movies;
-            //   })
-            //   .catch(error => {
-            //     console.error(error);
-            //   });
-
-            // if (response.status === 200) {
-            //     props.navigation.navigate("Home")
-            // } else {
-            //     alert("Adresse mail ou mot de passe incorrect")
-            // }
         } else {
             alert("Les deux champs sont obligatoires")
         }
