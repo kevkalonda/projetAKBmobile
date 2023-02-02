@@ -14,35 +14,35 @@ const Tab = createMaterialBottomTabNavigator();
 function Home() {
   return (
     <Tab.Navigator
-    shifting={true}
-    labeled={true}
-    sceneAnimationEnabled={false}
-    activeColor="#00aea2"
-    inactiveColor="#676767"
-    barStyle={{ backgroundColor: '#e07b7b',}}
-    
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ color }) => {
-        const icons = {
-          Accueil: 'home',
-          Favoris: Platform.OS==="ios"?"ios-heart-outline" : 'heart-outline',
-          Reservation:'cart-sharp',
-          Profil:'person-circle',
-          Publier:'add-circle-outline',
-        };
-      
-  
-        return (
-              <Icon
+      shifting={true}
+      labeled={true}
+      sceneAnimationEnabled={false}
+      activeColor="#00aea2"
+      inactiveColor="#676767"
+      barStyle={{ backgroundColor: '#e07b7b', }}
+
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color }) => {
+          const icons = {
+            Accueil: 'home',
+            Favoris: Platform.OS === "ios" ? "ios-heart-outline" : 'heart-outline',
+            Reservation: 'cart-sharp',
+            Profil: 'person-circle',
+            Publier: 'add-circle-outline',
+          };
+
+
+          return (
+            <Icon
               name={icons[route.name]}
               color={color}
-              size=  {26}
+              size={26}
             />
-        );
-      },
-      tabBarBadge:false
-    })}>
-      <Tab.Screen name="Accueil" component={HomeScreen} options={{title:'Accueil'}}/>
+          );
+        },
+        tabBarBadge: false
+      })}>
+      <Tab.Screen name="Accueil" component={HomeScreen} options={{ title: 'Accueil' }} />
       <Tab.Screen name="Favoris" component={Favoris} />
       <Tab.Screen name="Publier" component={Publier} />
       <Tab.Screen name="Reservation" component={Reservation} />

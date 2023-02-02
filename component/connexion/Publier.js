@@ -23,7 +23,7 @@ const Publier = () => {
 
 const styles = StyleSheet.create({
   baseText: {
-    fontFamily:Platform.OS=="ios"? "Cochin":"sans-serif",
+    fontFamily: Platform.OS == "ios" ? "Cochin" : "sans-serif",
   },
   titleText: {
     fontSize: 20,

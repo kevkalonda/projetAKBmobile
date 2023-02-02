@@ -11,7 +11,7 @@ const Favoris = () => {
 
   return (
     <View>
-      
+
       <Text>Favoris</Text>
     </View>
   );
@@ -19,9 +19,10 @@ const Favoris = () => {
 
 const styles = StyleSheet.create({
   baseText: {
-    fontFamily:Platform.OS=="ios"? "Cochin":"sans-serif",
-    justifyContent:"center"
-  
+    fontFamily: Platform.OS == "ios" ? "Cochin" : "sans-serif",
+    justifyContent: "center",
+    backgroundColor: "#D8D8D8",
+
   },
   titleText: {
     fontSize: 20,

@@ -6,7 +6,10 @@ import MotDePasseOublier from './component/MotDePassOublier.js';
 import Home from './component/Home.js';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Compte from './component/connexion/Profil/Compte';
-import IconFont from 'react-native-vector-icons/FontAwesome';
+import Adresse from './component/connexion/Profil/Adresse';
+import Aide from './component/connexion/Profil/Aide';
+import MesDocuments from './component/connexion/Profil/MesDocuments'
+//import IconFont from 'react-native-vector-icons/FontAwesome';
 import { Platform, View,Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 
@@ -50,9 +53,9 @@ export default function App() {
         <Stack.Screen name="MotDePasseOublier" component={MotDePasseOublier} options={{ headerShown: false }} />
 
         <Stack.Screen name="Compte" component={Compte} options={{  title:'Données personnelles' }}/>
-        <Stack.Screen name="Aide" component={Compte} options={{  title:'Aide' }}/>
-        <Stack.Screen name="Adresses" component={Compte} options={{  title:'Adresses' }}/>
-        <Stack.Screen name="MesDocuments" component={Compte} options={{  title:'Mes documents' }}/>
+        <Stack.Screen name="Aide" component={Aide} options={{  title:'Aide' }}/>
+        <Stack.Screen name="Adresses" component={Adresse} options={{  title:'Adresses' }}/>
+        <Stack.Screen name="MesDocuments" component={MesDocuments} options={{  title:'Mes documents' }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
