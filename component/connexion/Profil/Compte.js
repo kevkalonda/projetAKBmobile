@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, TextInput, StyleSheet, Image, Platform, SafeAreaView, ScrollView } from 'react-native';
+import React from 'react';
+import { Image, Platform, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function Compte(props) {
@@ -11,7 +11,7 @@ export default function Compte(props) {
     }
 
     const deleteCompte = () => {
-        alert("suppression du compte")
+        alert("suppression du compteaaaa")
         //props.navigation.navigate('MotDePasseOublier')
     }
 
