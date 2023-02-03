@@ -1,7 +1,7 @@
+import { Picker } from "@react-native-picker/picker";
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, TextInput, StyleSheet, Image, SegmentedControlIOS } from 'react-native';
-import { Picker } from "@react-native-picker/picker";
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function Inscription(props) {
     const inputAccessoryViewID = 'uniqueID';
@@ -16,10 +16,10 @@ export default function Inscription(props) {
         if(nom.length > 0 && prenom.length >0 && mail.length > 0 && mdp2.length >0 && mdp1.length >0){
             if(mdp2 === mdp1){
                 const data = {
-                    "idadm": null,
-                    "mailadm": mail,
-                    "photoprofiladm": "",
-                    "mot_de_passe_adm": mdp1,
+                    "idcpt": null,
+                    "mailcpt": mail,
+                    "photoprofilcpt": "",
+                    "motdepassecpt": mdp1,
                     "user": {
                         "idusr": null,
                         "nomusr": nom,
@@ -36,14 +36,14 @@ export default function Inscription(props) {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 }
-                fetch('http://172.20.10.10:8083/connexionUser', requestOptions)
+                fetch('http://192.168.90.152:8083/inscriptionUtilisateur', requestOptions)
                     .then(response => response.json())
                     .then(data => {
-                        if (data.statutTO === "user") {
-                            //props.navigation.navigate('Home')
-                            alert("inscription reussi");
+                        if (data.statutTO === "Inscription effectué") {
+                            props.navigation.navigate('Home')
+                            //alert("inscription reussi");
                         } else {
-                            alert("erreur serveur");
+                            alert(data.commentaireTO);
                         }
                     });
             }else{
