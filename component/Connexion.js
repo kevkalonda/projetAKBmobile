@@ -20,27 +20,24 @@ export default function Connexion(props) {
             var data = {
 
                 "email": "test@gmail.com",
-                
-                }
 
-                const requestOptions = {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                     body: JSON.stringify({ email: compte,mot_de_pass:mdp })
-                };
-            
-            
-            
-   
-            fetch('http://192.168.90.152:8083/connexionUser', requestOptions)
-        .then(response => response.json())
-        .then(data => {
-            if(data.statutTO==="user"){
-                props.navigation.navigate('Home')
-            }else{
-                alert("erreur connexion");
             }
-        });
+
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: compte, mot_de_pass: mdp })
+            };
+
+            fetch('http://172.20.10.10:8083/connexionUser', requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.statutTO === "user") {
+                        props.navigation.navigate('Home')
+                    } else {
+                        alert("erreur connexion");
+                    }
+                });
 
 
         } else {

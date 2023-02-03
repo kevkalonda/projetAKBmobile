@@ -1,14 +1,57 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, TextInput, StyleSheet, Image, SegmentedControlIOS } from 'react-native';
+import { Picker } from "@react-native-picker/picker";
 
 export default function Inscription(props) {
     const inputAccessoryViewID = 'uniqueID';
     const initialText = '';
-    const [text, setText] = useState(initialText);
-    const [count, setCount] = useState(0);
+    const [Enable, setEnable] = useState("Madame");
+    const [nom, setNom] = useState(initialText);
+    const [prenom, setPrenom] = useState(initialText);
+    const [mail, setMail] = useState(initialText);
+    const [mdp2, setMdp2] = useState(initialText);
+    const [mdp1, setMdp1] = useState(initialText);
     const onPress = () => {
-        alert("Connexion")
+        if(nom.length > 0 && prenom.length >0 && mail.length > 0 && mdp2.length >0 && mdp1.length >0){
+            if(mdp2 === mdp1){
+                const data = {
+                    "idadm": null,
+                    "mailadm": mail,
+                    "photoprofiladm": "",
+                    "mot_de_passe_adm": mdp1,
+                    "user": {
+                        "idusr": null,
+                        "nomusr": nom,
+                        "prenomusr": prenom,
+                        "datenaissance": "",
+                        "adresseusr": "",
+                        "codepostaleusr": "",
+                        "pieceidentiteusr": "",
+                        "sexeusr": Enable
+                    }
+                }
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                }
+                fetch('http://172.20.10.10:8083/connexionUser', requestOptions)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.statutTO === "user") {
+                            //props.navigation.navigate('Home')
+                            alert("inscription reussi");
+                        } else {
+                            alert("erreur serveur");
+                        }
+                    });
+            }else{
+                alert("Les deux mot de passe ne sont pas identique")
+            }
+        }else{
+            alert("Tous les champs sont obligatoires")
+        }
     };
 
     const retourConexion = () => {
@@ -18,26 +61,30 @@ export default function Inscription(props) {
     return (
         <View style={styles.container}>
             <Image style={{ marginTop: 5, width: Platform.OS == "ios" ? 200 : 150, height: Platform.OS == "ios" ? 200 : 150 }} source={require('../assets/AKB_menu.png')} />
-            <TextInput
-                style={styles.top}
-                inputAccessoryViewID={inputAccessoryViewID}
-                onChangeText={setText}
-                value={text}
-                placeholder={'Sexe'}
-            />
+            <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
+                <Text style={{color: "white",alignSelf:"center", fontSize:15, marginLeft:10 }}>Civilité</Text>
+                <Picker
+                    selectedValue={Enable}
+                    style={{ height: 200, width: 350, color: "white" }}
+                    onValueChange={(itemValue) => setEnable(itemValue)}>
+                    <Picker.Item label="Madame" value="F" />
+                    <Picker.Item label="Monsieur" value="M" />
+                </Picker>
+            </View>
+            
             <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
                 <TextInput
                     style={styles.input2}
                     inputAccessoryViewID={inputAccessoryViewID}
-                    onChangeText={setText}
-                    value={text}
+                    onChangeText={setNom}
+                    value={nom}
                     placeholder={'Nom'}
                 />
                 <TextInput
                     style={styles.input2}
                     inputAccessoryViewID={inputAccessoryViewID}
-                    onChangeText={setText}
-                    value={text}
+                    onChangeText={setPrenom}
+                    value={prenom}
                     placeholder={'Prenom'}
                 />
             </View>
@@ -45,22 +92,24 @@ export default function Inscription(props) {
             <TextInput
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
-                onChangeText={setText}
-                value={text}
+                onChangeText={setMail}
+                value={mail}
                 placeholder={'mail'}
             />
             <TextInput
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
-                onChangeText={setText}
-                value={text}
+                onChangeText={setMdp1}
+                value={mdp1}
+                secureTextEntry={true}
                 placeholder={'Mot de passe'}
             />
             <TextInput
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
-                onChangeText={setText}
-                value={text}
+                onChangeText={setMdp2}
+                value={mdp2}
+                secureTextEntry={true}
                 placeholder={'Confirmation mot de passe'}
             />
             <TouchableOpacity style={styles.button}
