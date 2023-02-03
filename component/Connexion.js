@@ -29,7 +29,7 @@ export default function Connexion(props) {
                 body: JSON.stringify({ email: compte, mot_de_pass: mdp })
             };
 
-            fetch('http://172.20.10.10:8083/connexionUser', requestOptions)
+            fetch('http://192.168.90.42/allReservation', requestOptions)
                 .then(response => response.json())
                 .then(data => {
                     if (data.statutTO === "user") {
