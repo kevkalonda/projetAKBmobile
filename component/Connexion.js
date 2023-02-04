@@ -1,21 +1,48 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, TextInput, StyleSheet, Image, Platform } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function Connexion(props) {
 
     const inputAccessoryViewID = 'uniqueID';
     const initialText = '';
 
-    const [showPass, setShowPass] = useState(false);
-    const [text, setText] = useState(initialText);
-    const [count, setCount] = useState(0);
+    const [compte, setCompte] = useState(initialText);
+    const [mdp, setMdp] = useState(initialText);
+
+
     const onPress = () => {
         alert("Connexion")
     };
 
-    const connexion = () => {
-        props.navigation.navigate("Home")
+    const connexion = async () => {
+        if (compte.length > 0 || mdp.length > 0) {
+            var data = {
+
+                "email": "test@gmail.com",
+
+            }
+
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: compte, mot_de_pass: mdp })
+            };
+
+            fetch('http://192.168.90.42/allReservation', requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.statutTO === "user") {
+                        props.navigation.navigate('Home')
+                    } else {
+                        alert("erreur connexion");
+                    }
+                });
+
+
+        } else {
+            alert("Les deux champs sont obligatoires")
+        }
     }
 
     const inscription = () => {
@@ -30,17 +57,18 @@ export default function Connexion(props) {
             <TextInput
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
-                onChangeText={setText}
-                value={text}
-                placeholder={'Please type here…'}
+                onChangeText={setCompte}
+                value={compte}
+                placeholder={'Entrez votre mail'}
             />
 
             <TextInput
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
-                onChangeText={setText}
-                value={text}
-                placeholder={'Please type here…'}
+                onChangeText={setMdp}
+                value={mdp}
+                secureTextEntry={true}
+                placeholder={'Entrez votre mot de passe'}
             />
 
             <TouchableOpacity style={styles.button}

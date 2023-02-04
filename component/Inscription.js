@@ -1,43 +1,148 @@
+import { Picker } from "@react-native-picker/picker";
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, TextInput, StyleSheet, Image, SegmentedControlIOS } from 'react-native';
 
+import { Text, View, TouchableOpacity, TextInput, StyleSheet, Image, SegmentedControlIOS, LogBox  } from 'react-native';
+import { Picker } from "@react-native-picker/picker";
+import { DatePickerModal } from 'react-native-paper-dates';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+
+LogBox.ignoreLogs(['Warning: ...']); 
+LogBox.ignoreAllLogs();
 export default function Inscription(props) {
     const inputAccessoryViewID = 'uniqueID';
     const initialText = '';
-    const [text, setText] = useState(initialText);
-    const [count, setCount] = useState(0);
+    const [Enable, setEnable] = useState("Madame");
+    const [nom, setNom] = useState(initialText);
+    const [prenom, setPrenom] = useState(initialText);
+    const [mail, setMail] = useState(initialText);
+    const [mdp2, setMdp2] = useState(initialText);
+    const [mdp1, setMdp1] = useState(initialText);
+    const [date, setDate] = useState(new Date());
+    
+   
+
+    const [visible, setVisible] = React.useState(false)
+    const onDismiss = React.useCallback(() => {
+      setVisible(false);
+    }, [setVisible])
+
+    const onChange = React.useCallback(({ date }) => {
+        setVisible(false)
+        setDate(date);
+      }, [])
+
     const onPress = () => {
-        alert("Connexion")
+        if(nom.length > 0 && prenom.length >0 && mail.length > 0 && mdp2.length >0 && mdp1.length >0){
+            if(mdp2 === mdp1){
+                const data = {
+                    "idcpt": null,
+                    "mailcpt": mail,
+                    "photoprofilcpt": "",
+                    "motdepassecpt": mdp1,
+                    "user": {
+                        "idusr": null,
+                        "nomusr": nom,
+                        "prenomusr": prenom,
+                        "datenaissance": date,
+                        "adresseusr": "",
+                        "codepostaleusr": "",
+                        "pieceidentiteusr": "",
+                        "sexeusr": Enable
+                    }
+                }
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                }
+                fetch('http://192.168.90.152:8083/inscriptionUtilisateur', requestOptions)
+
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.statutTO === "Inscription effectué") {
+                            props.navigation.navigate('Home')
+                            //alert("inscription reussi");
+                        } else {
+                            alert(data.commentaireTO);
+                        }
+                    });
+            }else{
+                alert("Les deux mot de passe ne sont pas identique")
+            }
+        }else{
+            alert("Tous les champs sont obligatoires")
+        }
     };
 
+    const updateDate =()=>{
+        setVisible(true);
+    }
     const retourConexion = () => {
         props.navigation.navigate('Connexion')
     }
 
     return (
-        <View style={styles.container}>
-            <Image style={{ marginTop: 5, width: Platform.OS == "ios" ? 200 : 150, height: Platform.OS == "ios" ? 200 : 150 }} source={require('../assets/AKB_menu.png')} />
-            <TextInput
-                style={styles.top}
-                inputAccessoryViewID={inputAccessoryViewID}
-                onChangeText={setText}
-                value={text}
-                placeholder={'Sexe'}
+        <View style={styles.container}>            
+            { Platform.OS == "ios" ?
+                <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
+                <Text style={{color: "black",alignSelf:"center", fontSize:20, marginLeft:15, fontWeight:"bold" }}>Civilité</Text>
+                <Picker
+                    selectedValue={Enable}
+                    style={{ height: 200, width: "65%", color: "white" }}
+                    onValueChange={(itemValue) => setEnable(itemValue)}>
+                    <Picker.Item label="Madame" value="F" />
+                    <Picker.Item label="Monsieur" value="M" />
+                </Picker>
+                </View> :
+                <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
+                <Text style={{color: "white",alignSelf:"center", fontSize:15, marginLeft:10 }}>Civilité</Text>
+                <Picker
+                    selectedValue={Enable}
+                    style={{ height: 200, width: "60%", color: "white" }}
+                    onValueChange={(itemValue) => setEnable(itemValue)}>
+                    <Picker.Item label="Madame" value="F" />
+                    <Picker.Item label="Monsieur" value="M" />
+                </Picker>
+                </View>  
+            }
+
+            <DatePickerModal
+                mode="single"
+                visible={visible}
+                onDismiss={onDismiss}
+                date={date}
+                onConfirm={onChange}
+                saveLabel="Enregistrer" // optional
+                label="Selectionner une date" // optional
+                locale={"fr"}
+                animationType="slide" // optional, default is 'slide' on ios/android and 'none' on web
             />
+            <View style={{ flexDirection: 'row', justifyContent:"space-around" }}>
+                <Text style={{fontSize:15, fontWeight:"bold", alignSelf:"baseline", marginRight:"20%"}}>Selectionner une Date</Text>
+                <TouchableOpacity onPress={updateDate} style={{alignSelf:"baseline"}}>
+                    <View style={{ flexDirection: 'row', justifyContent: "space-between",  }}>
+                        <Text style={{alignSelf:"center", marginRight:5}}>{date.getDate()}/{date.getMonth()+1}/{date.getFullYear()}</Text>
+                        <Icon name="calendar-outline" size={35} style={{alignSelf:"center"}}/>
+                    </View>
+                </TouchableOpacity>
+            </View>
+            
+            
             <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
                 <TextInput
                     style={styles.input2}
                     inputAccessoryViewID={inputAccessoryViewID}
-                    onChangeText={setText}
-                    value={text}
+                    onChangeText={setNom}
+                    value={nom}
                     placeholder={'Nom'}
                 />
                 <TextInput
                     style={styles.input2}
                     inputAccessoryViewID={inputAccessoryViewID}
-                    onChangeText={setText}
-                    value={text}
+                    onChangeText={setPrenom}
+                    value={prenom}
                     placeholder={'Prenom'}
                 />
             </View>
@@ -45,22 +150,24 @@ export default function Inscription(props) {
             <TextInput
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
-                onChangeText={setText}
-                value={text}
+                onChangeText={setMail}
+                value={mail}
                 placeholder={'mail'}
             />
             <TextInput
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
-                onChangeText={setText}
-                value={text}
+                onChangeText={setMdp1}
+                value={mdp1}
+                secureTextEntry={true}
                 placeholder={'Mot de passe'}
             />
             <TextInput
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
-                onChangeText={setText}
-                value={text}
+                onChangeText={setMdp2}
+                value={mdp2}
+                secureTextEntry={true}
                 placeholder={'Confirmation mot de passe'}
             />
             <TouchableOpacity style={styles.button}
@@ -119,8 +226,8 @@ const styles = StyleSheet.create({
     button: {
         width: '90%',
         padding: 15,
-        marginTop: 20,
-        marginBottom: 20,
+        marginTop: 5,
+        marginBottom: 5,
         borderWidth: 1,
         borderRadius: 10,
         borderColor: '#e07b7b',
