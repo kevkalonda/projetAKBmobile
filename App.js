@@ -8,14 +8,24 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Compte from './component/connexion/Profil/Compte';
 import Adresse from './component/connexion/Profil/Adresse';
 import Aide from './component/connexion/Profil/Aide';
+import Reserver from './component/connexion/Reserver/Reserver';
 import MesDocuments from './component/connexion/Profil/MesDocuments'
 //import IconFont from 'react-native-vector-icons/FontAwesome';
+import React, { useState } from 'react';
 import { Platform, View,Image, TouchableOpacity, StyleSheet } from 'react-native';
-
+import { Button, Menu, Divider,Provider } from 'react-native-paper';
 
 
 export default function App() {
   const Stack = createNativeStackNavigator();
+  const [visible, setVisible] = React.useState(false);
+
+  const deconnexion = ()=>{
+    alert("deconnexion")
+  }
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
   
   return (
     <NavigationContainer>
@@ -26,36 +36,26 @@ export default function App() {
       }}>
         <Stack.Screen name="Home" component={Home}  
         options={{
-          title:"AKB VEHICULE",
+          title:"AKB",
           headerBackVisible:false,
+          
           headerLeft:()=>(
             <View>
               <Image style={{height:40, width:40}} source={require('./assets/AKB_menu.png')} />
             </View>
         ),
-        headerRight:()=>(
-          <View >
-            <TouchableOpacity activeOpacity={0.7}
-            onPress={()=>{
-              alert("Ici mettre deconnexion")
-            }}>
-                <Icon style={{}}
-                size={30}
-                name={Platform.OS==="ios"?"ios-ellipsis-vertical":"ellipsis-vertical"}
-              />
-            </TouchableOpacity>
-          </View>
-        )
       }}
         />
         <Stack.Screen name="Connexion" component={Connexion} options={{  headerShown: false }}/>
         <Stack.Screen name="Inscription" component={Inscription} options={{ headerShown: false }} />
         <Stack.Screen name="MotDePasseOublier" component={MotDePasseOublier} options={{ headerShown: false }} />
+        
+        <Stack.Screen name="Reserver" component={Reserver} options={{  title:'Reserver', headerBackTitle:"" }}/>
 
-        <Stack.Screen name="Compte" component={Compte} options={{  title:'Données personnelles' }}/>
-        <Stack.Screen name="Aide" component={Aide} options={{  title:'Aide' }}/>
-        <Stack.Screen name="Adresses" component={Adresse} options={{  title:'Adresses' }}/>
-        <Stack.Screen name="MesDocuments" component={MesDocuments} options={{  title:'Mes documents' }}/>
+        <Stack.Screen name="Compte" component={Compte} options={{  title:'Données personnelles', headerBackTitle:"" }}/>
+        <Stack.Screen name="Aide" component={Aide} options={{  title:'Aide', headerBackTitle:"" }}/>
+        <Stack.Screen name="Adresses" component={Adresse} options={{  title:'Adresses', headerBackTitle:"" }}/>
+        <Stack.Screen name="MesDocuments" component={MesDocuments} options={{  title:'Mes documents', headerBackTitle:"" }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

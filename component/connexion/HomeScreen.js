@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import IconCom from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconFont from 'react-native-vector-icons/FontAwesome5';
 
-const HomeScreen = () => {
+const HomeScreen = (props) => {
   const [titleText, setTitleText] = useState("Home");
   const bodyText = "This is not really a bird nest.";
 
@@ -18,6 +18,11 @@ const HomeScreen = () => {
       "s'appliqueront en plus du prix " +
       "du carburant.")
   };
+
+  const redirectReserver = () => {
+    alert("reserver")
+    props.navigation.navigate('Reserver')
+  }
 
   const numbers = ['vehicule1.jpg', "vehicule2.jpg", "vehicule3.jpg", "vehicule4.jpg", "vehicule5.jpg",
     "vehicule6.jpg", "vehicule7.jpg", "vehicule8.jpg", "vehicule10.jpg", "vehicule9.jpg"];
@@ -40,7 +45,7 @@ const HomeScreen = () => {
                   <Image source={getUrl({ number })} style={{ width: 190, height: 130, marginBottom: 15 }} />
                 </TouchableOpacity>
                 <Text>Prix : 20€ /Kmh</Text>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={redirectReserver}>
                   <Text style={{ alignSelf: "center", fontWeight: "bold" }}>Reserver</Text>
                 </TouchableOpacity>
               </View>

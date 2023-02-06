@@ -17,6 +17,10 @@ const Profil = (props) => {
     props.navigation.navigate('Compte')
   }
 
+  const deconnexion = () => {
+    props.navigation.navigate('Connexion')
+  }
+
   const redirectAide = () => {
     props.navigation.navigate('Aide')
   }
@@ -64,6 +68,13 @@ const Profil = (props) => {
           </View>
         </TouchableOpacity>
       </View>
+      <View>
+        <TouchableOpacity style={styles.button}
+          onPress={deconnexion}
+        >
+          <Text style={styles.textButton}>Deonnexion</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -101,7 +112,27 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 10,
     marginTop: 10
-  }
+  },
+  textButton: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#676767",
+    alignItems: "center",
+    textAlign: "center",
+    justifyContent: "center"
+},
+button: {
+    width: '90%',
+    padding: 15,
+    marginTop: 20,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: '#e07b7b',
+    backgroundColor: '#e07b7b',
+    textAlign: "center",
+    alignSelf:"center"
+},
 });
 
 export default Profil;
