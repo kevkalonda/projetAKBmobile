@@ -5,35 +5,15 @@ import { Checkbox } from 'react-native-paper';
 import { WebView } from 'react-native-webview';
 import Feather from 'react-native-vector-icons/Feather';
 
-const Recapitulatif = () => {
-  const [titleText, setTitleText] = useState("Publier");
-  const bodyText = "This is not really a bird nest.";
+const Recapitulatif = (props) => {
+
   const [checked, setChecked] = React.useState(false);
   const [showGateway, setShowGateway] = useState(false);
   const [prog, setProg] = useState(false);
   const [progClr, setProgClr] = useState('#000');
 
-  async function _onApprove(data, actions) {
-    let order = await actions.order.capture();
-    console.log(order);
-    window.ReactNativeWebView &&
-      window.ReactNativeWebView.postMessage(JSON.stringify(order));
-    return order;
-  }
 
-  function _onError(err) {
-    console.log(err);
-    let errObj = {
-      err: err,
-      status: "FAILED",
-    };
-    window.ReactNativeWebView &&
-      window.ReactNativeWebView.postMessage(JSON.stringify(errObj));
-  }
 
-  const onPressTitle = () => {
-    setTitleText("Publier [pressed]");
-  };
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -111,7 +91,7 @@ const Recapitulatif = () => {
             </View>
           </View>
           <WebView
-            source={{uri: 'https://www.google.com'}}
+            source={{uri: 'http://172.18.2.210:3000/paiement'}}
             style={{flex: 1}}
             onLoadStart={() => {
               setProg(true);

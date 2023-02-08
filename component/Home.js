@@ -4,14 +4,15 @@ import HomeScreen from './connexion/HomeScreen'
 import Profil from './connexion/Profil';
 import Reservation from './connexion/Reservation';
 import Favoris from './connexion/Favoris';
-import Publier from './connexion/Publier';
+import Vehicule from './connexion/Vehicules/Vehicule';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Platform } from 'react-native';
 
 const Tab = createMaterialBottomTabNavigator();
 
-function Home() {
+function Home(props) {
+  const idUser = props.route.params.id;
   return (
     <Tab.Navigator
       shifting={true}
@@ -42,11 +43,11 @@ function Home() {
         },
         tabBarBadge: false
       })}>
-      <Tab.Screen name="Accueil" component={HomeScreen} options={{ title: 'Accueil' }} />
-      <Tab.Screen name="Favoris" component={Favoris} />
-      <Tab.Screen name="Publier" component={Publier} />
-      <Tab.Screen name="Reservation" component={Reservation} />
-      <Tab.Screen name="Profil" component={Profil} />
+      <Tab.Screen name="Accueil" component={HomeScreen} options={{ title: 'Accueil' }} initialParams={{id:idUser}}/>
+      <Tab.Screen name="Favoris" component={Favoris} initialParams={{id:idUser}}/>
+      <Tab.Screen name="Publier" component={Vehicule} initialParams={{id:idUser}}/>
+      <Tab.Screen name="Reservation" component={Reservation} initialParams={{id:idUser}}/>
+      <Tab.Screen name="Profil" component={Profil} initialParams={{id:idUser}}/>
     </Tab.Navigator>
   );
 }

@@ -20,8 +20,8 @@ const HomeScreen = (props) => {
   };
 
   const redirectReserver = () => {
-    alert("reserver")
-    props.navigation.navigate('Reserver')
+    console.log(props.route.params.id);
+    props.navigation.navigate('Reserver',{id:255})
   }
 
   const numbers = ['vehicule1.jpg', "vehicule2.jpg", "vehicule3.jpg", "vehicule4.jpg", "vehicule5.jpg",

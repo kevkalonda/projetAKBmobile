@@ -33,7 +33,7 @@ export default function Connexion(props) {
             //             alert("erreur connexion");
             //         }
             //     });
-                props.navigation.navigate('Home')
+                props.navigation.navigate('Home',{id:"id de la personne connecté"})
 
         } else {
             alert("Les deux champs sont obligatoires")

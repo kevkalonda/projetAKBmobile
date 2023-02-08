@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import {  View, TouchableOpacity,SafeAreaView, ScrollView, TextInput, StyleSheet, Image, Platform } from 'react-native';
+import { Button } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconCom from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconFont from 'react-native-vector-icons/FontAwesome5';
-import { DatePickerModal } from 'react-native-paper-dates';
+import { DatePickerModal, TimePickerModal } from 'react-native-paper-dates';
 import { Picker } from "@react-native-picker/picker";
 import { Text } from 'react-native-paper';
 
@@ -17,6 +18,18 @@ export default function Reserver(props) {
     const [date, setDate] = useState(new Date());
     
    
+    const [visibleTime, setVisibleTime] = React.useState(false)
+    const onDismissTime = React.useCallback(() => {
+        setVisibleTime(false)
+    }, [setVisibleTime])
+  
+    const onConfirmTime = React.useCallback(
+      ({ hours, minutes }) => {
+        setVisibleTime(false);
+        console.log({ hours, minutes });
+      },
+      [setVisibleTime]
+    );
 
     const [visible, setVisible] = React.useState(false)
     const onDismiss = React.useCallback(() => {
@@ -33,7 +46,7 @@ export default function Reserver(props) {
     }
 
     const recapReservation=()=>{
-        props.navigation.navigate("Recapitulatif")
+        props.navigation.navigate("Recapitulatif",{id:props.route.params.id})
     }
 
     const [Enable, setEnable] = useState("00");
@@ -49,9 +62,7 @@ export default function Reserver(props) {
           "s'appliqueront en plus du prix " +
           "du carburant.")
       };
-    const heures =["00","01","02","03","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"];
-    const minutes =["00","01","02","03","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24",
-    "31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"];
+
     return (
         <View style={styles.container}>
             <Image source={getUrl()} style={{ width: "100%", height: "30%", marginBottom: 2, alignSelf: "center" }} />
@@ -136,25 +147,18 @@ export default function Reserver(props) {
                                 </View>
                                 <View>
                                     <View style={{ flexDirection: 'row', justifyContent: "flex-start" }}>
-                                        <View style={{ marginLeft:"12%", flexDirection: 'row', justifyContent: "flex-start" }}>
-                                        <Text style={{alignSelf:"center",  fontSize: 15, fontWeight: "bold"}}>Heure :</Text>
-                                        <Picker
-                                            selectedValue={Enable}
-                                            style={{ height: 200, width: "30%", color: "white" }}
-                                            onValueChange={(itemValue) => setEnable(itemValue)}>
-                                            {heures.map((number) =>
-                                                <Picker.Item label={number} value={number} />
-                                            )}
-                                        </Picker>
-                                        <Text style={{alignSelf:"center"}}>:</Text>
-                                        <Picker
-                                            selectedValue={Enable2}
-                                            style={{ height: 200, width: "45%", color: "white" }}
-                                            onValueChange={(itemValue) => setEnable2(itemValue)}>
-                                            {minutes.map((number) =>
-                                                <Picker.Item label={number} value={number} />
-                                            )}
-                                        </Picker>
+                                        <View style={{ marginLeft: "12%", flexDirection: 'row', justifyContent: "flex-start" }}>
+                                            <Button onPress={() => setVisibleTime(true)} uppercase={false} mode="outlined" >
+                                                Heure
+                                            </Button>
+                                            <TimePickerModal
+                                                visible={visibleTime}
+                                                onDismiss={onDismissTime}
+                                                onConfirm={onConfirmTime}
+                                                hours={12}
+                                                minutes={14}
+                                            />
+                                            
                                         </View>
                                     </View>
                                 </View>
@@ -178,24 +182,19 @@ export default function Reserver(props) {
                                 <View>
                                     <View style={{ flexDirection: 'row', justifyContent: "flex-start" }}>
                                         <View style={{ marginLeft:"12%", flexDirection: 'row', justifyContent: "flex-start" }}>
-                                        <Text style={{alignSelf:"center",  fontSize: 15, fontWeight: "bold"}}>Heure :</Text>
-                                        <Picker
-                                            selectedValue={Enable}
-                                            style={{ height: 200, width: "30%", color: "white" }}
-                                            onValueChange={(itemValue) => setEnable(itemValue)}>
-                                            {heures.map((number) =>
-                                                <Picker.Item label={number} value={number} />
-                                            )}
-                                        </Picker>
-                                        <Text style={{alignSelf:"center"}}>:</Text>
-                                        <Picker
-                                            selectedValue={Enable2}
-                                            style={{ height: 200, width: "45%", color: "white" }}
-                                            onValueChange={(itemValue) => setEnable2(itemValue)}>
-                                            {minutes.map((number) =>
-                                                <Picker.Item label={number} value={number} />
-                                            )}
-                                        </Picker>
+                                        <View style={{ marginLeft: "12%", flexDirection: 'row', justifyContent: "flex-start" }}>
+                                            <Button onPress={() => setVisibleTime(true)} uppercase={false} mode="outlined" >
+                                                Heure
+                                            </Button>
+                                            <TimePickerModal
+                                                visible={visibleTime}
+                                                onDismiss={onDismissTime}
+                                                onConfirm={onConfirmTime}
+                                                hours={12}
+                                                minutes={14}
+                                            />
+                                            
+                                        </View>
                                         </View>
                                     </View>
                                 </View>

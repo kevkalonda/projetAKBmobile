@@ -4,7 +4,7 @@ import Connexion from './component/Connexion';
 import Inscription from './component/Inscription.js';
 import MotDePasseOublier from './component/MotDePassOublier.js';
 import Home from './component/Home.js';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Vehicule from './component/connexion/Vehicules/Vehicule';
 import Compte from './component/connexion/Profil/Compte';
 import Adresse from './component/connexion/Profil/Adresse';
 import Aide from './component/connexion/Profil/Aide';
@@ -53,6 +53,8 @@ export default function App() {
         
         <Stack.Screen name="Reserver" component={Reserver} options={{  title:'Reserver', headerBackTitle:"" }}/>
         <Stack.Screen name="Recapitulatif" component={Recapitulatif} options={{  title:'Recapitulatif', headerBackTitle:"" }}/>
+
+        <Stack.Screen name="Vehicule" component={Vehicule} options={{  title:'Vehicule', headerBackTitle:"" }}/>
 
         <Stack.Screen name="Compte" component={Compte} options={{  title:'Données personnelles', headerBackTitle:"" }}/>
         <Stack.Screen name="Aide" component={Aide} options={{  title:'Aide', headerBackTitle:"" }}/>

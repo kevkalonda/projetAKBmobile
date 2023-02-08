@@ -10,26 +10,26 @@ const Profil = (props) => {
   const bodyText = "This is not really a bird nest.";
 
   const onPressTitle = () => {
-    setTitleText("Compte");
+    setTitleText("Compte", {id:props.route.params.id});
   };
 
   const redirectCompte = () => {
-    props.navigation.navigate('Compte')
+    props.navigation.navigate('Compte',{id:props.route.params.id})
   }
 
   const deconnexion = () => {
-    props.navigation.navigate('Connexion')
+    props.navigation.navigate('Connexion',{id:props.route.params.id})
   }
 
   const redirectAide = () => {
-    props.navigation.navigate('Aide')
+    props.navigation.navigate('Aide',{id:props.route.params.id})
   }
 
   const redirectAdresse = () => {
-    props.navigation.navigate('Adresses')
+    props.navigation.navigate('Adresses',{id:props.route.params.id})
   }
   const redirectMesDocuments = () => {
-    props.navigation.navigate('MesDocuments')
+    props.navigation.navigate('MesDocuments',{id:props.route.params.id})
   }
 
   return (
