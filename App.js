@@ -9,7 +9,8 @@ import Compte from './component/connexion/Profil/Compte';
 import Adresse from './component/connexion/Profil/Adresse';
 import Aide from './component/connexion/Profil/Aide';
 import Reserver from './component/connexion/Reserver/Reserver';
-import MesDocuments from './component/connexion/Profil/MesDocuments'
+import MesDocuments from './component/connexion/Profil/MesDocuments';
+import Recapitulatif from './component/connexion/Reserver/Recapitulatif';
 //import IconFont from 'react-native-vector-icons/FontAwesome';
 import React, { useState } from 'react';
 import { Platform, View,Image, TouchableOpacity, StyleSheet } from 'react-native';
@@ -51,6 +52,7 @@ export default function App() {
         <Stack.Screen name="MotDePasseOublier" component={MotDePasseOublier} options={{ headerShown: false }} />
         
         <Stack.Screen name="Reserver" component={Reserver} options={{  title:'Reserver', headerBackTitle:"" }}/>
+        <Stack.Screen name="Recapitulatif" component={Recapitulatif} options={{  title:'Recapitulatif', headerBackTitle:"" }}/>
 
         <Stack.Screen name="Compte" component={Compte} options={{  title:'Données personnelles', headerBackTitle:"" }}/>
         <Stack.Screen name="Aide" component={Aide} options={{  title:'Aide', headerBackTitle:"" }}/>

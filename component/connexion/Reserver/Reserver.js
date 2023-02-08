@@ -32,6 +32,10 @@ export default function Reserver(props) {
         setVisible(true);
     }
 
+    const recapReservation=()=>{
+        props.navigation.navigate("Recapitulatif")
+    }
+
     const [Enable, setEnable] = useState("00");
     const [Enable2, setEnable2] = useState("00");
 
@@ -200,7 +204,7 @@ export default function Reserver(props) {
                     </View>
                     <View>
                         <TouchableOpacity style={styles.button}
-                            onPress={{}}
+                            onPress={recapReservation}
                         >
                             <Text style={styles.textButton}>Payer</Text>
                         </TouchableOpacity>
