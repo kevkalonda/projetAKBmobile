@@ -11,6 +11,7 @@ import Aide from './component/connexion/Profil/Aide';
 import Reserver from './component/connexion/Reserver/Reserver';
 import MesDocuments from './component/connexion/Profil/MesDocuments';
 import Recapitulatif from './component/connexion/Reserver/Recapitulatif';
+import AddVehiculeMarque from './component/connexion/Vehicules/AddVehiculeMarque';
 //import IconFont from 'react-native-vector-icons/FontAwesome';
 import React, { useState } from 'react';
 import { Platform, View,Image, TouchableOpacity, StyleSheet } from 'react-native';
@@ -55,6 +56,7 @@ export default function App() {
         <Stack.Screen name="Recapitulatif" component={Recapitulatif} options={{  title:'Recapitulatif', headerBackTitle:"" }}/>
 
         <Stack.Screen name="Vehicule" component={Vehicule} options={{  title:'Vehicule', headerBackTitle:"" }}/>
+        <Stack.Screen name="AddVehiculeMarque" component={AddVehiculeMarque} options={{  title:'', headerBackTitle:"" }}/>
 
         <Stack.Screen name="Compte" component={Compte} options={{  title:'Données personnelles', headerBackTitle:"" }}/>
         <Stack.Screen name="Aide" component={Aide} options={{  title:'Aide', headerBackTitle:"" }}/>

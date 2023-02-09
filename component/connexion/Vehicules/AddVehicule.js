@@ -1,37 +1,43 @@
-import React, { useState } from "react";
-import { Text, StyleSheet, View,SafeAreaView,ScrollView, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text, StyleSheet, View,SafeAreaView,ScrollView, TouchableOpacity, TextInput } from "react-native";
 import { Picker } from "@react-native-picker/picker";
+import vehicule from "./BDDVehicule";
+import Icon from 'react-native-vector-icons/Ionicons';
 
-const AddVehicule = () => {
-  const [titleText, setTitleText] = useState("Publier");
-  const inputAccessoryViewID = 'uniqueID';
+const AddVehicule = (props) => {
   const initialText = '';
   const [mdp2, setMdp2] = useState(initialText);
-  const [Enable, setEnable] = useState("");
+  const [marque, setMarque] = useState();
+ 
 
-  const [etape, setEtape] = useState(0);
   const bodyText = "This is not really a bird nest.";
 
+  const ajoutMarque = (marque)=>{
+    setMarque(marque)
+    //console.log(marque)
+  }
+
   const onPress = () => {
-    setEtape(1);
+    let ret = etape1+1;
+    props.navigationa.navigate("AddVehiculeMarque",{marque : marque});
   };
 
-  
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView >
-        {
-          etape===0 ?
-          <View>
-            <Text>Choisir la marque</Text>
+          
+            <Text style={{alignSelf:"center", fontWeight:"bold", fontSize:25, marginTop:"25%", color:"#e07b7b" }}>Choisir la marque</Text>
               <View>
-                <Text>Marque : </Text>
+                <Text style={{marginLeft:"10%", marginTop:25}}>Nos marques : </Text>
                 <Picker
-                  selectedValue={Enable}
-                  style={{ height: 200, width: "80%", color: "white" }}
-                  onValueChange={(itemValue) => setEnable(itemValue)}>
-                  <Picker.Item label="Madame" value="F" />
-                  <Picker.Item label="Monsieur" value="M" />
+                  selectedValue={marque}
+                  style={{ height: 200, width: "90%", color: "black", alignSelf:"center", marginBottom:"10%" }}
+                  onValueChange={(itemValue) => setMarque(marque)}>
+                  {vehicule.marque.map((number) => 
+                      <Picker.Item label={number.nomMarque} value={number} />
+                    )
+                  }
+                  
                 </Picker>
               </View>
               <TouchableOpacity style={styles.button}
@@ -39,67 +45,7 @@ const AddVehicule = () => {
             >
                 <Text style={styles.textButton}>Suivant</Text>
             </TouchableOpacity>
-          </View>:
-          etape===1 ?
-          <View>
-            <Text>Choisir la marque</Text>
-              <View>
-                <Text>Model : </Text>
-                <Picker
-                  selectedValue={Enable}
-                  style={{ height: 200, width: "80%", color: "white" }}
-                  onValueChange={(itemValue) => setEnable(itemValue)}>
-                  <Picker.Item label="Madame" value="F" />
-                  <Picker.Item label="Monsieur" value="M" />
-                </Picker>
-              </View>
-              <TouchableOpacity style={styles.button}
-                onPress={onPress}
-            >
-                <Text style={styles.textButton}>Suivant</Text>
-            </TouchableOpacity>
-          </View>:
-          etape===2 ?
-          <View>
-            <Text>Marque</Text>
-            <Text>Model</Text>
-            <Text>Serie</Text>
-            <TextInput
-                style={styles.top}
-                inputAccessoryViewID={inputAccessoryViewID}
-                onChangeText={setMdp2}
-                value={mdp2}
-                secureTextEntry={true}
-                placeholder={'Serie'}
-            />
-            <View>
-                <Text>Type de moteur : </Text>
-                <Picker
-                  selectedValue={Enable}
-                  style={{ height: 200, width: "80%", color: "white" }}
-                  onValueChange={(itemValue) => setEnable(itemValue)}>
-                  <Picker.Item label="Madame" value="F" />
-                  <Picker.Item label="Monsieur" value="M" />
-                </Picker>
-              </View>
-              <TouchableOpacity style={styles.button}
-                onPress={onPress}
-            >
-                <Text style={styles.textButton}>Suivant</Text>
-            </TouchableOpacity>
-          </View>:
-
-                <View>
-
-                  <Text>reservoirvcl</Text>
-                  <Text>kmvcl</Text>
-                  <Text>descriptionvcl</Text>
-                  <Text>boitevitessevcl</Text>
-
-                </View>
-
-        }
-        
+          
       </ScrollView>
     </SafeAreaView>
   );
@@ -143,7 +89,8 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderRadius: 10,
       borderColor: '#e07b7b',
-      backgroundColor: '#676767',
+      alignSelf:"center",
+      backgroundColor: '#e07b7b',
       textAlign: "center",
   },
 
