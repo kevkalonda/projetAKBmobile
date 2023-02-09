@@ -1,4 +1,3 @@
-import { Picker } from "@react-native-picker/picker";
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -108,8 +107,10 @@ export default function Inscription(props) {
                 </Picker>
                 </View>  
             }
-
-            <DatePickerModal
+            {
+                Platform.OS == "ios" ? 
+                <View>
+                    <DatePickerModal
                 mode="single"
                 visible={visible}
                 onDismiss={onDismiss}
@@ -118,7 +119,8 @@ export default function Inscription(props) {
                 saveLabel="Enregistrer" // optional
                 label="Selectionner une date" // optional
                 locale={"fr"}
-                animationType="slide" // optional, default is 'slide' on ios/android and 'none' on web
+                animationType="slide"
+                 // optional, default is 'slide' on ios/android and 'none' on web
             />
             <View style={{ flexDirection: 'row', justifyContent:"space-around" }}>
                 <Text style={{fontSize:15, fontWeight:"bold", alignSelf:"baseline", marginRight:"20%"}}>Selectionner une Date</Text>
@@ -129,6 +131,13 @@ export default function Inscription(props) {
                     </View>
                 </TouchableOpacity>
             </View>
+                </View>
+                :
+                <View></View>
+                
+            }
+            
+            
             
             
             <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>

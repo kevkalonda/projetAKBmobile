@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import IconCom from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconFont from 'react-native-vector-icons/FontAwesome5';
 
-const Favoris = () => {
+const MesVehicules = () => {
   const [titleText, setTitleText] = useState("Home");
   const bodyText = "This is not really a bird nest.";
 
@@ -19,15 +19,16 @@ const Favoris = () => {
       "du carburant.")
   };
 
-  const numbers = ['vehicule1.jpg', "vehicule2.jpg", "vehicule3.jpg", "vehicule4.jpg", "vehicule5.jpg",
-    "vehicule6.jpg", "vehicule7.jpg", "vehicule8.jpg", "vehicule10.jpg", "vehicule9.jpg"];
-  var ico = "vehicule4.jpg";
-  const getUrl = (number) => require('../../assets/' + ico);
+  const numbers = [];
+  var ico = "vehicule2.jpg";
+  const getUrl = (number) => require('../../../assets/' + ico);
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView >
-        {numbers.map((number) =>
+        
+        { numbers.length !==0 ?
+        numbers.map((number) =>
           <View style={styles.container2} key={number}>
             <View style={{ flexDirection: "row", justifyContent: "space-around", marginTop: 30 }}>
               <View>
@@ -41,7 +42,7 @@ const Favoris = () => {
                 </TouchableOpacity>
                 <Text>Prix : 20€ /Kmh</Text>
                 <TouchableOpacity style={styles.button}>
-                  <Text style={{ alignSelf: "center", fontWeight: "bold" }}>Reserver</Text>
+                  <Text style={{ alignSelf: "center", fontWeight: "bold" }}>Modifier</Text>
                 </TouchableOpacity>
               </View>
               <View style={{ marginTop: 30 }}>
@@ -100,7 +101,11 @@ const Favoris = () => {
               </View>
             </View>
           </View>
-        )}
+        ):
+        <View style={{justifyContent:"center", alignContent:"center",alignSelf:"center", marginTop:"50%"}}>
+          <Text style={{fontSize:20, fontWeight:"bold", color:"#e07b7b"}}>Aucun vehicule publier</Text>
+        </View>
+        }
 
       </ScrollView>
     </SafeAreaView>
@@ -145,4 +150,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Favoris;
+export default MesVehicules;

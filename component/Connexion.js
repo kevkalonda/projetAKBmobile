@@ -17,11 +17,6 @@ export default function Connexion(props) {
 
     const connexion = async () => {
         if (compte.length > 0 || mdp.length > 0) {
-            var data = {
-
-                "email": "test@gmail.com",
-
-            }
 
             const requestOptions = {
                 method: 'POST',
@@ -29,15 +24,16 @@ export default function Connexion(props) {
                 body: JSON.stringify({ email: compte, mot_de_pass: mdp })
             };
 
-            fetch('http://192.168.90.152:8083/connexionUser', requestOptions)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.statutTO === "user") {
-                        props.navigation.navigate('Home')
-                    } else {
-                        alert("erreur connexion");
-                    }
-                });
+            // fetch('http://192.168.90.42/allReservation', requestOptions)
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         if (data.statutTO === "user") {
+            //             props.navigation.navigate('Home')
+            //         } else {
+            //             alert("erreur connexion");
+            //         }
+            //     });
+                props.navigation.navigate('Home',{id:"id de la personne connecté"})
 
 
         } else {
