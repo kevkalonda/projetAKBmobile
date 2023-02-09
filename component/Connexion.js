@@ -35,6 +35,7 @@ export default function Connexion(props) {
             //     });
                 props.navigation.navigate('Home',{id:"id de la personne connecté"})
 
+
         } else {
             alert("Les deux champs sont obligatoires")
         }

@@ -1,20 +1,52 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, TextInput, StyleSheet, Image, Platform, SafeAreaView, ScrollView } from 'react-native';
+import { Image, Platform, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function Compte(props) {
+
+
 
     const updateNumero = () => {
         alert("modification")
         //props.navigation.navigate('MotDePasseOublier')
     }
-
+    
     const deleteCompte = () => {
-        alert("suppression du compte")
-        //props.navigation.navigate('MotDePasseOublier')
-    }
-
+        const data = {
+            "idcpt": null,
+            "mailcpt": "a", // valeur à récupérer automatiquement
+            "photoprofilcpt": "",
+            "motdepassecpt": "",
+            "user": {
+                "idusr": null,
+                "nomusr": "",
+                "prenomusr": "",
+                "datenaissance": "",
+                "adresseusr": "",
+                "codepostaleusr": "",
+                "pieceidentiteusr": "",
+                "sexeusr": ""
+            }}
+        
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        };
+        fetch('http://192.168.90.152:8083/delCompte', requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            if (data.statutTO === "compte supprime") {
+                props.navigation.navigate('Home')
+            } else {
+                alert("compte non supprimer");//cas qui n'arrive jamais !!!!!!!!
+            }
+        });
+    
+    
+    } 
+    
+  
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView >
