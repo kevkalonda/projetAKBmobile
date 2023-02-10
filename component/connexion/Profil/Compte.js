@@ -11,9 +11,14 @@ export default function Compte(props) {
     const [prenom,setPrenom] = useState();
 
 
-    const updateNumero = () => {
-        alert("modification")
-        //props.navigation.navigate('MotDePasseOublier')
+    const updateEmail = () => {
+
+        props.navigation.navigate('Email')
+    }
+
+    const updatemdp = () => {
+ 
+        props.navigation.navigate('Mot')
     }
 
     useEffect(() => {
@@ -109,7 +114,7 @@ export default function Compte(props) {
                                 <Text>{emailUser}</Text>
                             </View>
                         </View>
-                        <TouchableOpacity style={{ marginRight: "20%" }} onPress={updateNumero} >
+                        <TouchableOpacity style={{ marginRight: "20%" }} onPress={updateEmail} >
                             <Icon name='pencil-sharp' size={40} />
                         </TouchableOpacity>
                     </View>
@@ -122,7 +127,7 @@ export default function Compte(props) {
                                 <Text>{mdp}</Text>
                             </View>
                         </View>
-                        <TouchableOpacity style={{ marginRight: "20%" }} onPress={updateNumero} >
+                        <TouchableOpacity style={{ marginRight: "20%" }} onPress={updatemdp} >
                             <Icon name='pencil-sharp' size={40} />
                         </TouchableOpacity>
                     </View>
