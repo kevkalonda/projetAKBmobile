@@ -19,15 +19,16 @@ const Favoris = () => {
       "du carburant.")
   };
 
-  const numbers = ['vehicule1.jpg', "vehicule2.jpg", "vehicule3.jpg", "vehicule4.jpg", "vehicule5.jpg",
-    "vehicule6.jpg", "vehicule7.jpg", "vehicule8.jpg", "vehicule10.jpg", "vehicule9.jpg"];
+  const numbers = [];
   var ico = "vehicule4.jpg";
   const getUrl = (number) => require('../../assets/' + ico);
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView >
-        {numbers.map((number) =>
+        
+        { numbers.length !==0 ?
+        numbers.map((number) =>
           <View style={styles.container2} key={number}>
             <View style={{ flexDirection: "row", justifyContent: "space-around", marginTop: 30 }}>
               <View>
@@ -100,7 +101,11 @@ const Favoris = () => {
               </View>
             </View>
           </View>
-        )}
+        ):
+        <View style={{justifyContent:"center", alignContent:"center",alignSelf:"center", marginTop:"50%"}}>
+          <Text style={{fontSize:20, fontWeight:"bold", color:"#e07b7b"}}>Aucun vehicule favoris</Text>
+        </View>
+        }
 
       </ScrollView>
     </SafeAreaView>

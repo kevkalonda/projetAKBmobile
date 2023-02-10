@@ -12,6 +12,9 @@ import Reserver from './component/connexion/Reserver/Reserver';
 import MesDocuments from './component/connexion/Profil/MesDocuments';
 import Recapitulatif from './component/connexion/Reserver/Recapitulatif';
 import AddVehiculeMarque from './component/connexion/Vehicules/AddVehiculeMarque';
+import AddVehiculeCarburant from './component/connexion/Vehicules/AddVehiculeCarburant';
+import AddVehiculeAvantDernier from './component/connexion/Vehicules/AddVehiculeAvantDernier';
+import RecapitulatifAddVehicul from './component/connexion/Vehicules/RecapitulatifAddVehicul';
 //import IconFont from 'react-native-vector-icons/FontAwesome';
 import React, { useState } from 'react';
 import { Platform, View,Image, TouchableOpacity, StyleSheet } from 'react-native';
@@ -57,6 +60,9 @@ export default function App() {
 
         <Stack.Screen name="Vehicule" component={Vehicule} options={{  title:'Vehicule', headerBackTitle:"" }}/>
         <Stack.Screen name="AddVehiculeMarque" component={AddVehiculeMarque} options={{  title:'', headerBackTitle:"" }}/>
+        <Stack.Screen name="AddVehiculeCarburant" component={AddVehiculeCarburant} options={{  title:'', headerBackTitle:"" }}/>
+        <Stack.Screen name="AddVehiculeAvantDernier" component={AddVehiculeAvantDernier} options={{  title:'', headerBackTitle:"" }}/>
+        <Stack.Screen name="RecapitulatifAddVehicul" component={RecapitulatifAddVehicul} options={{  title:'', headerBackTitle:"" }}/>
 
         <Stack.Screen name="Compte" component={Compte} options={{  title:'Données personnelles', headerBackTitle:"" }}/>
         <Stack.Screen name="Aide" component={Aide} options={{  title:'Aide', headerBackTitle:"" }}/>

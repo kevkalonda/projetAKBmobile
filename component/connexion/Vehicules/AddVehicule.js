@@ -5,26 +5,22 @@ import vehicule from "./BDDVehicule";
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const AddVehicule = (props) => {
+  const [marque, setMarque] = useState("");
   const initialText = '';
-  const [mdp2, setMdp2] = useState(initialText);
-  const [marque, setMarque] = useState();
- 
-
-  const bodyText = "This is not really a bird nest.";
-
-  const ajoutMarque = (marque)=>{
-    setMarque(marque)
-    //console.log(marque)
-  }
+  const idUser = props.route.params.id;
 
   const onPress = () => {
-    let ret = etape1+1;
-    props.navigationa.navigate("AddVehiculeMarque",{marque : marque});
+    //console.log(marque)
+    let modele = vehicule.marque.filter(function(hero) {
+      return hero.nomMarque === marque;
+    })
+    //console.log(modele);
+    props.navigation.navigate("AddVehiculeMarque",{id:idUser ,marque : modele.marque, nomMarque : marque});
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView >
+    <View>
+      
           
             <Text style={{alignSelf:"center", fontWeight:"bold", fontSize:25, marginTop:"25%", color:"#e07b7b" }}>Choisir la marque</Text>
               <View>
@@ -32,12 +28,10 @@ const AddVehicule = (props) => {
                 <Picker
                   selectedValue={marque}
                   style={{ height: 200, width: "90%", color: "black", alignSelf:"center", marginBottom:"10%" }}
-                  onValueChange={(itemValue) => setMarque(marque)}>
+                  onValueChange={(itemValue) => setMarque(itemValue)}>
                   {vehicule.marque.map((number) => 
-                      <Picker.Item label={number.nomMarque} value={number} />
-                    )
-                  }
-                  
+                      <Picker.Item label={number.nomMarque} value={number.nomMarque} key={number.nomMarque} />
+                    )}
                 </Picker>
               </View>
               <TouchableOpacity style={styles.button}
@@ -46,8 +40,8 @@ const AddVehicule = (props) => {
                 <Text style={styles.textButton}>Suivant</Text>
             </TouchableOpacity>
           
-      </ScrollView>
-    </SafeAreaView>
+    
+    </View>
   );
 };
 
