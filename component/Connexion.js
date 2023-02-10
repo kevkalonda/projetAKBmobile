@@ -23,17 +23,18 @@ export default function Connexion(props) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: compte, mot_de_pass: mdp })
             };
-
-            // fetch('http://192.168.90.42/allReservation', requestOptions)
-            //     .then(response => response.json())
-            //     .then(data => {
-            //         if (data.statutTO === "user") {
-            //             props.navigation.navigate('Home')
-            //         } else {
-            //             alert("erreur connexion");
-            //         }
-            //     });
-                props.navigation.navigate('Home',{id:"id de la personne connecté"})
+            
+             fetch('http://192.168.90.152:8083/connexionUser', requestOptions)
+                 .then(response => response.json())
+                 .then(data => {
+                     if (data.statutTO === "user") {
+                        props.navigation.navigate('Home',{email:data.mailcptTO})
+                        
+                     } else {
+                         alert("erreur connexion");
+                    }
+                 });
+                
 
 
         } else {

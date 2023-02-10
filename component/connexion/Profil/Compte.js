@@ -1,20 +1,63 @@
 import { StatusBar } from 'expo-status-bar';
+import React, { useEffect, useState } from 'react';
 import { Image, Platform, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-
 export default function Compte(props) {
 
+
+    const emailUser = props.route.params.email;
+    const [mdp, setMdp] = useState();
+    const [nom, setNom] = useState();
+    const [prenom,setPrenom] = useState();
 
 
     const updateNumero = () => {
         alert("modification")
         //props.navigation.navigate('MotDePasseOublier')
     }
+
+    useEffect(() => {
+        const data = {
+            "idcpt": null,
+            "email": emailUser, // valeur à récupérer automatiquement
+            "photoprofilcpt": "",
+            "motdepassecpt": "",
+            "user": {
+                "idusr": null,
+                "nomusr": "",
+                "prenomusr": "",
+                "datenaissance": "",
+                "adresseusr": "",
+                "codepostaleusr": "",
+                "pieceidentiteusr": "",
+                "sexeusr": ""
+            }}
+        
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        };
+
+        fetch('http://192.168.90.152:8083/detailUser', requestOptions)
+                 .then(response => response.json())
+                 .then(data => {
+                     if (data.statutTO === "user") {
+                        setMdp(data.mdpTO)
+                        setNom(data.nomusrTO)
+                        setPrenom(data.prenomusrTO)
+                        
+                     }
+          
+                   
+                 });
+       
+     });
     
     const deleteCompte = () => {
         const data = {
             "idcpt": null,
-            "mailcpt": "a", // valeur à récupérer automatiquement
+            "mailcpt": props.route.params.email, // valeur à récupérer automatiquement
             "photoprofilcpt": "",
             "motdepassecpt": "",
             "user": {
@@ -36,8 +79,8 @@ export default function Compte(props) {
         fetch('http://192.168.90.152:8083/delCompte', requestOptions)
         .then(response => response.json())
         .then(data => {
-            if (data.statutTO === "compte supprime") {
-                props.navigation.navigate('Home')
+            if (data.commentaireTO === "commentaireSupprime") {
+                props.navigation.navigate('Connexion')
             } else {
                 alert("compte non supprimer");//cas qui n'arrive jamais !!!!!!!!
             }
@@ -48,27 +91,14 @@ export default function Compte(props) {
     
   
     return (
+       
         <SafeAreaView style={styles.container}>
             <ScrollView >
                 <View>
                     <Icon name='person-circle-outline' size={200} style={{ alignSelf: "center", marginTop: 10, marginBottom: 25 }} />
-                    <Text style={{ fontSize: 25, alignSelf: "center", marginBottom: 40 }}>Kevin LUMWANGA</Text>
+                    <Text style={{ fontSize: 25, alignSelf: "center", marginBottom: 40 }}>{nom}  {prenom}</Text>
 
-                    <View style={{ flexDirection: "row", justifyContent: "space-between", }}>
-                        <View style={{ marginLeft: 50 }}>
-                            <View style={{ marginBottom: 10 }}>
-                                <Text style={{ marginBottom: 5, color: '#e07b7b' }}>Numéro de téléphone</Text>
-                                <Text>0621211744</Text>
-                            </View>
-                            <View>
-                                <Text style={{ marginBottom: 5, color: '#e07b7b' }}>Numéro client</Text>
-                                <Text>0621211744</Text>
-                            </View>
-                        </View>
-                        <TouchableOpacity style={{ marginRight: "20%" }} onPress={updateNumero} >
-                            <Icon name='pencil-sharp' size={40} />
-                        </TouchableOpacity>
-                    </View>
+                    
                     <Image style={{ tintColor: "#BDBDBD", marginLeft: "10%", marginBottom: 20, marginTop: 18, height: Platform.OS == "ios" ? 2 : 1, width: Platform.OS == "ios" ? "80%" : "80%" }} source={require('../../../assets/Capture.png')} />
 
                     <Icon name="mail" size={40} style={{ marginLeft: "10%", marginBottom: 10 }} />
@@ -76,7 +106,7 @@ export default function Compte(props) {
                         <View style={{ marginLeft: 50 }}>
                             <View style={{ marginBottom: 10 }}>
                                 <Text style={{ marginBottom: 5, color: '#e07b7b' }}>Adresse e-mail</Text>
-                                <Text>kevinlumwanga7@gmail.com</Text>
+                                <Text>{emailUser}</Text>
                             </View>
                         </View>
                         <TouchableOpacity style={{ marginRight: "20%" }} onPress={updateNumero} >
@@ -89,7 +119,7 @@ export default function Compte(props) {
                         <View style={{ marginLeft: 50 }}>
                             <View style={{ marginBottom: 10 }}>
                                 <Text style={{ marginBottom: 5, color: '#e07b7b' }}>Mot de passe</Text>
-                                <Text>***********</Text>
+                                <Text>{mdp}</Text>
                             </View>
                         </View>
                         <TouchableOpacity style={{ marginRight: "20%" }} onPress={updateNumero} >

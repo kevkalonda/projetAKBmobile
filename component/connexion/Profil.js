@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, TouchableOpacity, Image } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import IconFont from 'react-native-vector-icons/Ionicons';
 
 
 
@@ -14,7 +13,7 @@ const Profil = (props) => {
   };
 
   const redirectCompte = () => {
-    props.navigation.navigate('Compte',{id:props.route.params.id})
+    props.navigation.navigate('Compte',{id:props.route.params.id,email:props.route.params.email})
   }
 
   const deconnexion = () => {

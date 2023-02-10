@@ -1,18 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import * as React from 'react';
-import HomeScreen from './connexion/HomeScreen'
+import { Platform } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Favoris from './connexion/Favoris';
+import HomeScreen from './connexion/HomeScreen';
 import Profil from './connexion/Profil';
 import Reservation from './connexion/Reservation';
-import Favoris from './connexion/Favoris';
 import Vehicule from './connexion/Vehicules/Vehicule';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { Platform } from 'react-native';
 
 const Tab = createMaterialBottomTabNavigator();
 
 function Home(props) {
   const idUser = props.route.params.id;
+  const emailUser = props.route.params.email;
   return (
     <Tab.Navigator
       shifting={true}
@@ -47,7 +47,7 @@ function Home(props) {
       <Tab.Screen name="Favoris" component={Favoris} initialParams={{id:idUser}}/>
       <Tab.Screen name="Publier" component={Vehicule} initialParams={{id:idUser}}/>
       <Tab.Screen name="Reservation" component={Reservation} initialParams={{id:idUser}}/>
-      <Tab.Screen name="Profil" component={Profil} initialParams={{id:idUser}}/>
+      <Tab.Screen name="Profil" component={Profil} initialParams={{id:idUser,email:emailUser}}/>
     </Tab.Navigator>
   );
 }
