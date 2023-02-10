@@ -5,11 +5,12 @@ import MesVehicules from './MesVehicules';
 
 const Drawer = createDrawerNavigator();
 
-const Vehicule = () => {
+const Vehicule = (props) => {
+  const idUser = props.route.params.id
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="Mes Vehicule" component={MesVehicules} />
-      <Drawer.Screen name="Ajouter un Vehicule" component={AddVehicule} />
+      <Drawer.Screen name="Mes Vehicule" component={MesVehicules} initialParams={{id:idUser}}/>
+      <Drawer.Screen name="Ajouter un Vehicule" component={AddVehicule} initialParams={{id:idUser}} />
     </Drawer.Navigator>
   );
 }

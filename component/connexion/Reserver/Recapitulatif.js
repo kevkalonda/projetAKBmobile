@@ -16,15 +16,15 @@ const Recapitulatif = (props) => {
 
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-    <View>
-      <Text>Recaputilatif reservation</Text>
+    <SafeAreaView style={{flex: 1, alignContent:"center", justifyContent:"center"}}>
+    <View style={{alignSelf:"center"}}>
+      <Text style={{fontSize: 25, color:"#e07b7b", marginBottom:10, alignSelf:"center"}}>Recaputilatif reservation</Text>
       <View>
-        <Text>Nom Vehicule</Text>
-        <Text>Model</Text>
-        <Text>Marque</Text>
+        <Text style={{alignSelf:"center"}}>Nom Vehicule</Text>
+        <Text style={{alignSelf:"center"}}>Model</Text>
+        <Text style={{alignSelf:"center"}}>Marque</Text>
 
-        <View>
+        <View style={{marginBottom:15}}>
           <View>
             <Text>Prise du vehicule</Text>
             <Text>Date et heure</Text>
@@ -40,12 +40,11 @@ const Recapitulatif = (props) => {
             <Text>lieu du retour de vehicule</Text>
           </View>
         </View>
-        <View>
-          <Text>Assurance vehicule</Text>
-          <Text>Montant à payer</Text>
+        <View style={{flexDirection:"row", justifyContent:"space-arround", marginBottom:"10%", marginTop:10}}>
+          <Text style={{marginRight:10}}>Montant à payer</Text>
           <Text>15000</Text>
         </View>
-        <View>
+        <View style={{marginBottom:"10%" ,flexDirection:"row", justifyContent:"space-between", alignSelf:"center", width:"80%"}}>
           <Checkbox
             status={checked ? 'checked' : 'unchecked'}
             onPress={() => {
@@ -126,6 +125,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     backgroundColor: '#00457C',
     borderRadius: 3,
+    alignSelf:"center"
   },
   btn: {
     flex: 1,

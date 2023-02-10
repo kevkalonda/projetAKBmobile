@@ -29,6 +29,7 @@ export default function MotDePasseOublier(props) {
             <Text style={styles.textMdpOublier}>Mot de passe oublier ?</Text>
             <Text style={{ margin: 20, color: "white", textAlign: "center" }}>Saisir l'adresse mail assoccié au compte pour réinitialiser le mot de passe </Text>
             <TextInput
+                editable
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
                 onChangeText={setText}

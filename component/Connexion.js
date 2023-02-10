@@ -51,6 +51,7 @@ export default function Connexion(props) {
         <View style={styles.container}>
             <Image style={{ height: Platform.OS == "ios" ? 350 : 200, width: Platform.OS == "ios" ? 350 : 200 }} source={require('../assets/AKB_menu.png')} />
             <TextInput
+                 editable
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
                 onChangeText={setCompte}
@@ -59,6 +60,7 @@ export default function Connexion(props) {
             />
 
             <TextInput
+                editable
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
                 onChangeText={setMdp}

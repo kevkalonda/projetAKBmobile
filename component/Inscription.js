@@ -142,6 +142,7 @@ export default function Inscription(props) {
             
             <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
                 <TextInput
+                    editable
                     style={styles.input2}
                     inputAccessoryViewID={inputAccessoryViewID}
                     onChangeText={setNom}
@@ -149,6 +150,7 @@ export default function Inscription(props) {
                     placeholder={'Nom'}
                 />
                 <TextInput
+                    editable
                     style={styles.input2}
                     inputAccessoryViewID={inputAccessoryViewID}
                     onChangeText={setPrenom}
@@ -158,6 +160,7 @@ export default function Inscription(props) {
             </View>
 
             <TextInput
+                editable
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
                 onChangeText={setMail}
@@ -165,6 +168,7 @@ export default function Inscription(props) {
                 placeholder={'mail'}
             />
             <TextInput
+                editable
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
                 onChangeText={setMdp1}
@@ -173,6 +177,7 @@ export default function Inscription(props) {
                 placeholder={'Mot de passe'}
             />
             <TextInput
+                editable
                 style={styles.top}
                 inputAccessoryViewID={inputAccessoryViewID}
                 onChangeText={setMdp2}

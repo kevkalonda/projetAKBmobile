@@ -70,8 +70,7 @@ const Profil = (props) => {
       </View>
       <View>
         <TouchableOpacity style={styles.button}
-          onPress={deconnexion}
-        >
+          onPress={deconnexion}>
           <Text style={styles.textButton}>Deonnexion</Text>
         </TouchableOpacity>
       </View>
@@ -82,8 +81,6 @@ const Profil = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent:"center",
-    //alignItems:"center",
     alignContent: "center",
     backgroundColor: "#D8D8D8"
   },
