@@ -19,6 +19,32 @@ const MesVehicules = () => {
       "du carburant.")
   };
 
+
+  useEffect(() => {
+    const data = {
+      "idcpt": null,
+    }
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    };
+
+    // fetch('http://192.168.90.152:8083/detailUser', requestOptions)
+    //          .then(response => response.json())
+    //          .then(data => {
+    //              if (data.statutTO === "user") {
+    //                 setMdp(data.mdpTO)
+    //                 setNom(data.nomusrTO)
+    //                 setPrenom(data.prenomusrTO)
+
+    //              }
+
+
+    //          });
+
+  });
+
   const numbers = [];
   var ico = "vehicule2.jpg";
   const getUrl = (number) => require('../../../assets/' + ico);
@@ -26,85 +52,85 @@ const MesVehicules = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView >
-        
-        { numbers.length !==0 ?
-        numbers.map((number) =>
-          <View style={styles.container2} key={number}>
-            <View style={{ flexDirection: "row", justifyContent: "space-around", marginTop: 30 }}>
-              <View>
-                <View style={{ flexDirection: "row" }}>
-                  <Text style={{ marginBottom: 3, color: "#e07b7b", fontWeight: "bold", fontSize: 15 }}>RENAULT TWINGO</Text>
 
-                </View>
-                <Text style={{ marginBottom: 10, fontStyle: "italic", fontSize: 15 }}>Mini-Eco {number}</Text>
-                <TouchableOpacity>
-                  <Image source={getUrl({ number })} style={{ width: 190, height: 130, marginBottom: 15 }} />
-                </TouchableOpacity>
-                <Text>Prix : 20€ /Kmh</Text>
-                <TouchableOpacity style={styles.button}>
-                  <Text style={{ alignSelf: "center", fontWeight: "bold" }}>Modifier</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={{ marginTop: 30 }}>
-                <View style={{ flexDirection: "row", marginBottom: 10 }}>
-                  <Icon name="car-sport" size={20} />
-                  <Text style={{ marginLeft: 10, marginTop: 2 }}>Boite Manuelle</Text>
-                </View>
-                <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        {numbers.length !== 0 ?
+          numbers.map((number) =>
+            <View style={styles.container2} key={number}>
+              <View style={{ flexDirection: "row", justifyContent: "space-around", marginTop: 30 }}>
+                <View>
                   <View style={{ flexDirection: "row" }}>
-                    <IconCom name="car-door" size={20} />
-                    <Text style={{ marginLeft: 4, marginTop: 2, fontSize: 12 }}>3 portes</Text>
+                    <Text style={{ marginBottom: 3, color: "#e07b7b", fontWeight: "bold", fontSize: 15 }}>RENAULT TWINGO</Text>
+
                   </View>
-                  <View style={{ flexDirection: "row" }}>
-                    <IconFont name="user" size={20} />
-                    <Text style={{ marginLeft: 4, marginTop: 2, fontSize: 12 }}>4 places</Text>
-                  </View>
+                  <Text style={{ marginBottom: 10, fontStyle: "italic", fontSize: 15 }}>Mini-Eco {number}</Text>
+                  <TouchableOpacity>
+                    <Image source={getUrl({ number })} style={{ width: 190, height: 130, marginBottom: 15 }} />
+                  </TouchableOpacity>
+                  <Text>Prix : 20€ /Kmh</Text>
+                  <TouchableOpacity style={styles.button}>
+                    <Text style={{ alignSelf: "center", fontWeight: "bold" }}>Modifier</Text>
+                  </TouchableOpacity>
                 </View>
-                <Text>.................................</Text>
-                <View style={{ flexDirection: "row", marginTop: 10 }}>
-                  <IconCom name='gas-station' size={25} />
-                  <View>
-                    <Text style={{ fontSize: 12, color: "#e07b7b" }}>Politique de carburant</Text>
-                    <TouchableOpacity onPress={pleinArendrePlein}>
-                      <Text style={{ fontSize: 12, textDecorationLine: "underline" }}>Plein à rendre plein</Text>
+                <View style={{ marginTop: 30 }}>
+                  <View style={{ flexDirection: "row", marginBottom: 10 }}>
+                    <Icon name="car-sport" size={20} />
+                    <Text style={{ marginLeft: 10, marginTop: 2 }}>Boite Manuelle</Text>
+                  </View>
+                  <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                    <View style={{ flexDirection: "row" }}>
+                      <IconCom name="car-door" size={20} />
+                      <Text style={{ marginLeft: 4, marginTop: 2, fontSize: 12 }}>3 portes</Text>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <IconFont name="user" size={20} />
+                      <Text style={{ marginLeft: 4, marginTop: 2, fontSize: 12 }}>4 places</Text>
+                    </View>
+                  </View>
+                  <Text>.................................</Text>
+                  <View style={{ flexDirection: "row", marginTop: 10 }}>
+                    <IconCom name='gas-station' size={25} />
+                    <View>
+                      <Text style={{ fontSize: 12, color: "#e07b7b" }}>Politique de carburant</Text>
+                      <TouchableOpacity onPress={pleinArendrePlein}>
+                        <Text style={{ fontSize: 12, textDecorationLine: "underline" }}>Plein à rendre plein</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <Text>..................................</Text>
+                  <View style={{ marginTop: 10 }}>
+                    <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
+                      <Icon name="checkmark-circle" color={"green"} style={{ marginTop: 2 }} />
+                      <Text style={{ marginLeft: 2 }}>Responsabilité civile</Text>
+                    </View>
+
+                    <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
+                      <Icon name="checkmark-circle" color={"green"} style={{ marginTop: 2 }} />
+                      <Text style={{ marginLeft: 2 }}>Assurance tous risques</Text>
+                    </View>
+                    <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
+                      <Icon name="checkmark-circle" color={"green"} style={{ marginTop: 2 }} />
+                      <Text style={{ marginLeft: 2 }}>Annulation gratuite</Text>
+                    </View>
+                  </View>
+                  <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                    <TouchableOpacity>
+                      <Icon name="information-circle-outline" size={40} style={{ marginTop: 25 }} />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Icon name="arrow-redo-sharp" size={40} style={{ marginTop: 25 }} />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Icon name="heart" size={40} color="#e07b7b" style={{ marginTop: 25 }} />
                     </TouchableOpacity>
                   </View>
-                </View>
-                <Text>..................................</Text>
-                <View style={{ marginTop: 10 }}>
-                  <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
-                    <Icon name="checkmark-circle" color={"green"} style={{ marginTop: 2 }} />
-                    <Text style={{ marginLeft: 2 }}>Responsabilité civile</Text>
-                  </View>
 
-                  <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
-                    <Icon name="checkmark-circle" color={"green"} style={{ marginTop: 2 }} />
-                    <Text style={{ marginLeft: 2 }}>Assurance tous risques</Text>
-                  </View>
-                  <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
-                    <Icon name="checkmark-circle" color={"green"} style={{ marginTop: 2 }} />
-                    <Text style={{ marginLeft: 2 }}>Annulation gratuite</Text>
-                  </View>
                 </View>
-                <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                  <TouchableOpacity>
-                    <Icon name="information-circle-outline" size={40} style={{ marginTop: 25 }} />
-                  </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Icon name="arrow-redo-sharp" size={40} style={{ marginTop: 25 }} />
-                  </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Icon name="heart" size={40} color="#e07b7b" style={{ marginTop: 25 }} />
-                  </TouchableOpacity>
-                </View>
-
               </View>
             </View>
+          ) :
+          <View style={{ justifyContent: "center", alignContent: "center", alignSelf: "center", marginTop: "50%" }}>
+            <Text style={{ fontSize: 20, fontWeight: "bold", color: "#e07b7b" }}>Aucun vehicule publier</Text>
           </View>
-        ):
-        <View style={{justifyContent:"center", alignContent:"center",alignSelf:"center", marginTop:"50%"}}>
-          <Text style={{fontSize:20, fontWeight:"bold", color:"#e07b7b"}}>Aucun vehicule publier</Text>
-        </View>
         }
 
       </ScrollView>

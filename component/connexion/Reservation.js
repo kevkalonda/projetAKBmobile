@@ -19,6 +19,31 @@ const Reservation = () => {
       "du carburant.")
   };
 
+  useEffect(() => {
+    const data = {
+      "idcpt": null,
+    }
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    };
+
+    // fetch('http://192.168.90.152:8083/detailUser', requestOptions)
+    //          .then(response => response.json())
+    //          .then(data => {
+    //              if (data.statutTO === "user") {
+    //                 setMdp(data.mdpTO)
+    //                 setNom(data.nomusrTO)
+    //                 setPrenom(data.prenomusrTO)
+
+    //              }
+
+
+    //          });
+
+  });
+
   const numbers = [];
   var ico = "vehicule4.jpg";
   const getUrl = (number) => require('../../assets/' + ico);
