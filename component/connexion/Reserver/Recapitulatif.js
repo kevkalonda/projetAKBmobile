@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   ActivityIndicator,
   Modal,
-  Platform,
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
@@ -11,7 +10,6 @@ import {
 import { Checkbox, Text } from "react-native-paper";
 import Feather from "react-native-vector-icons/Feather";
 import { WebView } from "react-native-webview";
-import { URL_LOCAL_HOST, PORT  } from "@env";
 
 const Recapitulatif = (props) => {
   const [checked, setChecked] = React.useState(false);
@@ -29,7 +27,7 @@ const Recapitulatif = (props) => {
       body: JSON.stringify(data),
     };
 
-    // fetch(URL_LOCAL_HOST+":"+PORT+'/detailUser', requestOptions)
+    // fetch(URL_LOCAL_HOST+'/detailUser', requestOptions)
     //          .then(response => response.json())
     //          .then(data => {
     //              if (data.statutTO === "user") {
@@ -177,7 +175,7 @@ const Recapitulatif = (props) => {
 
 const styles = StyleSheet.create({
   baseText: {
-    fontFamily: Platform.OS == "ios" ? "Cochin" : "sans-serif",
+    fontFamily: "Cochin",
   },
   btnCon: {
     height: 45,

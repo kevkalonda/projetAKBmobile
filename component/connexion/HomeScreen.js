@@ -1,3 +1,4 @@
+import { URL_LOCAL_HOST } from "@env";
 import React, { useEffect, useState } from "react";
 import {
   Image,
@@ -12,7 +13,6 @@ import {
 import IconFont from "react-native-vector-icons/FontAwesome5";
 import Icon from "react-native-vector-icons/Ionicons";
 import IconCom from "react-native-vector-icons/MaterialCommunityIcons";
-import { URL_LOCAL_HOST, PORT  } from "@env";
 
 const HomeScreen = (props) => {
   const [titleText, setTitleText] = useState("Home");
@@ -43,12 +43,11 @@ const HomeScreen = (props) => {
       //body: JSON.stringify(data),
     };
 
-    fetch(URL_LOCAL_HOST+":"+PORT+"/vehicules", requestOptions)
+    fetch(URL_LOCAL_HOST + "/vehicules", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         setNumbers(data);
         modifierNumber(data);
-        alert(data[0].marquevclTO);
       });
   }, [update]);
 
@@ -60,13 +59,13 @@ const HomeScreen = (props) => {
 
   const redirectReserver = () => {
     console.log(props.route.params.id);
-    if(Platform.OS==="ios"){
-      props.navigation.navigate("Reserver", { id: 255 });
-    }else{
-      props.navigation.navigate("ReserverAndroid", { id: 255 });
+    if (Platform.OS === "ios") {
+      props.navigation.navigate("Reserver", { id: props.route.params.id });
+    } else {
+      props.navigation.navigate("ReserverAndroid", {
+        id: props.route.params.id,
+      });
     }
-    
-    
   };
 
   const [numbers, setNumbers] = React.useState([]);
@@ -109,7 +108,7 @@ const HomeScreen = (props) => {
                 </Text>
                 <TouchableOpacity>
                   <Image
-                    source={getUrl({ number })}
+                    source={{ uri: number.descriptionvclTO }}
                     style={{ width: 190, height: 130, marginBottom: 15 }}
                   />
                 </TouchableOpacity>

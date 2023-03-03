@@ -1,17 +1,17 @@
+import { URL_LOCAL_HOST } from "@env";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
   Image,
   Platform,
+  SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  ScrollView,
-  SafeAreaView
 } from "react-native";
-import { URL_LOCAL_HOST, PORT } from "@env";
 
 export default function Connexion(props) {
   const inputAccessoryViewID = "uniqueID";
@@ -32,13 +32,13 @@ export default function Connexion(props) {
         body: JSON.stringify({ email: compte, mot_de_pass: mdp }),
       };
 
-      fetch(URL_LOCAL_HOST + ":" + PORT + "/connexionUser", requestOptions)
+      fetch(URL_LOCAL_HOST + "/connexionUser", requestOptions)
         .then((response) => response.json())
         .then((data) => {
           if (data.statutTO === "user") {
             props.navigation.navigate("Home", { id: data.mailcptTO });
           } else {
-            alert("erreur connexion");
+            alert("connexion echoué !");
           }
         });
     } else {
@@ -54,9 +54,8 @@ export default function Connexion(props) {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView >
+      <ScrollView>
         <View style={styles.container2}>
-
           <Image
             style={{
               height: Platform.OS == "ios" ? 350 : 200,
@@ -92,7 +91,10 @@ export default function Connexion(props) {
                 Mot de passe oublier ? cliquez{" "}
               </Text>
               <TouchableOpacity class="hover:bg-sky-700" onPress={mdpOublier}>
-                <Text style={{ color: "#676767", fontWeight: "bold" }}> ici</Text>
+                <Text style={{ color: "#676767", fontWeight: "bold" }}>
+                  {" "}
+                  ici
+                </Text>
               </TouchableOpacity>
             </View>
             <View style={{ marginTop: 30, flexDirection: "row" }}>
@@ -113,7 +115,6 @@ export default function Connexion(props) {
         </View>
       </ScrollView>
     </SafeAreaView>
-
   );
 }
 

@@ -1,20 +1,20 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 
+import { URL_LOCAL_HOST } from "@env";
 import { Picker } from "@react-native-picker/picker";
 import {
   LogBox,
+  SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  ScrollView,
-  SafeAreaView
 } from "react-native";
 import { DatePickerModal } from "react-native-paper-dates";
 import Icon from "react-native-vector-icons/Ionicons";
-import { URL_LOCAL_HOST, PORT } from "@env";
 
 LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
@@ -70,13 +70,12 @@ export default function Inscription(props) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
         };
-        fetch(URL_LOCAL_HOST + ":" + PORT + "/inscriptionUtilisateur",
-          requestOptions
-        )
+        fetch(URL_LOCAL_HOST + "/inscriptionUtilisateur", requestOptions)
           .then((response) => response.json())
           .then((data) => {
-            if (data.statutTO === "Inscription effectué") {
-              props.navigation.navigate("Home");
+            if (data.statutTO === "Inscription utilisateur effectué") {
+              alert("inscription reussi");
+              props.navigation.navigate("Connexion");
               //alert("inscription reussi");
             } else {
               alert(data.commentaireTO);
@@ -99,10 +98,12 @@ export default function Inscription(props) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView >
+      <ScrollView>
         <View style={styles.container2}>
           {Platform.OS == "ios" ? (
-            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
               <Text
                 style={{
                   color: "black",
@@ -124,7 +125,9 @@ export default function Inscription(props) {
               </Picker>
             </View>
           ) : (
-            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
               <Text
                 style={{
                   color: "white",
@@ -157,7 +160,7 @@ export default function Inscription(props) {
                 label="Selectionner une date" // optional
                 locale={"fr"}
                 animationType="slide"
-              // optional, default is 'slide' on ios/android and 'none' on web
+                // optional, default is 'slide' on ios/android and 'none' on web
               />
               <View
                 style={{ flexDirection: "row", justifyContent: "space-around" }}
@@ -183,7 +186,8 @@ export default function Inscription(props) {
                     }}
                   >
                     <Text style={{ alignSelf: "center", marginRight: 5 }}>
-                      {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}
+                      {date.getDate()}/{date.getMonth() + 1}/
+                      {date.getFullYear()}
                     </Text>
                     <Icon
                       name="calendar-outline"
@@ -195,20 +199,31 @@ export default function Inscription(props) {
               </View>
             </View>
           ) : (
-            <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
-              <Text style={{ fontSize: 15, fontWeight: "bold", alignSelf: "center" }}>Date de naissance</Text>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <Text
+                style={{
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  alignSelf: "center",
+                }}
+              >
+                Date de naissance
+              </Text>
               <TextInput
                 style={styles.input3}
                 inputAccessoryViewID={inputAccessoryViewID}
                 onChangeText={setNom}
                 value={nom}
-                placeholder={'JJ/MM/AAAA'}
-
+                placeholder={"JJ/MM/AAAA"}
               />
             </View>
           )}
 
-          <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
             <TextInput
               editable
               style={styles.input2}
@@ -275,7 +290,6 @@ export default function Inscription(props) {
         </View>
       </ScrollView>
     </SafeAreaView>
-
   );
 }
 
@@ -317,7 +331,7 @@ const styles = StyleSheet.create({
   },
 
   input3: {
-    width: '40%',
+    width: "40%",
     backgroundColor: "white",
     borderWidth: 1,
     borderRadius: 3,
