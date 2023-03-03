@@ -3,6 +3,7 @@ import { Text, StyleSheet, View, SafeAreaView, ScrollView, TouchableOpacity, Ima
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconCom from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconFont from 'react-native-vector-icons/FontAwesome5';
+import { URL_LOCAL_HOST, PORT  } from "@env";
 
 const Favoris = () => {
   const [titleText, setTitleText] = useState("Home");

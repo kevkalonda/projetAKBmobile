@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Image, Platform, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { URL_LOCAL_HOST, PORT  } from "@env";
 
 export default function Compte(props) {
 
@@ -33,7 +34,7 @@ export default function Compte(props) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         };
-        fetch('http://192.168.90.152:8083/delCompte', requestOptions)
+        fetch(URL_LOCAL_HOST+":"+PORT+'/delCompte', requestOptions)
         .then(response => response.json())
         .then(data => {
             if (data.statutTO === "compte supprime") {

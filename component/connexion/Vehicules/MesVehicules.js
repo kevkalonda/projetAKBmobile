@@ -11,6 +11,8 @@ import {
 import IconFont from "react-native-vector-icons/FontAwesome5";
 import Icon from "react-native-vector-icons/Ionicons";
 import IconCom from "react-native-vector-icons/MaterialCommunityIcons";
+import { URL_LOCAL_HOST, PORT  } from "@env";
+
 
 const MesVehicules = () => {
   const [titleText, setTitleText] = useState("Home");
@@ -39,7 +41,7 @@ const MesVehicules = () => {
       body: JSON.stringify(data),
     };
 
-    // fetch('http://192.168.90.152:8083/detailUser', requestOptions)
+    // fetch(URL_LOCAL_HOST+":"+PORT+'/detailUser', requestOptions)
     //          .then(response => response.json())
     //          .then(data => {
     //              if (data.statutTO === "user") {

@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { URL_LOCAL_HOST, PORT  } from "@env";
 
 export default function Connexion(props) {
   const inputAccessoryViewID = "uniqueID";
@@ -29,7 +30,7 @@ export default function Connexion(props) {
         body: JSON.stringify({ email: compte, mot_de_pass: mdp }),
       };
 
-      fetch("http://172.20.10.12:8083/connexionUser", requestOptions)
+      fetch(URL_LOCAL_HOST+":"+PORT+"/connexionUser", requestOptions)
         .then((response) => response.json())
         .then((data) => {
           if (data.statutTO === "user") {

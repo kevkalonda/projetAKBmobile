@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { DatePickerModal } from "react-native-paper-dates";
 import Icon from "react-native-vector-icons/Ionicons";
+import { URL_LOCAL_HOST, PORT  } from "@env";
 
 LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
@@ -66,8 +67,7 @@ export default function Inscription(props) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
         };
-        fetch(
-          "http://192.168.90.152:8083/inscriptionUtilisateur",
+        fetch(URL_LOCAL_HOST+":"+PORT+"/inscriptionUtilisateur",
           requestOptions
         )
           .then((response) => response.json())

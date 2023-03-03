@@ -8,7 +8,7 @@ import IconFont from 'react-native-vector-icons/FontAwesome5';
 import { DatePickerModal, TimePickerModal } from 'react-native-paper-dates';
 import { Picker } from "@react-native-picker/picker";
 import { Text } from 'react-native-paper';
-
+import { URL_LOCAL_HOST, PORT  } from "@env";
 
 
 export default function ModifierVehicule(props) {

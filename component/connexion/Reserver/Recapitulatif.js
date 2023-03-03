@@ -11,6 +11,7 @@ import {
 import { Checkbox, Text } from "react-native-paper";
 import Feather from "react-native-vector-icons/Feather";
 import { WebView } from "react-native-webview";
+import { URL_LOCAL_HOST, PORT  } from "@env";
 
 const Recapitulatif = (props) => {
   const [checked, setChecked] = React.useState(false);
@@ -28,7 +29,7 @@ const Recapitulatif = (props) => {
       body: JSON.stringify(data),
     };
 
-    // fetch('http://192.168.90.152:8083/detailUser', requestOptions)
+    // fetch(URL_LOCAL_HOST+":"+PORT+'/detailUser', requestOptions)
     //          .then(response => response.json())
     //          .then(data => {
     //              if (data.statutTO === "user") {

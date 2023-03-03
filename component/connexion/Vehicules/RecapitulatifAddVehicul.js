@@ -7,6 +7,7 @@ import {
   View,
 } from "react-native";
 import { Text } from "react-native-paper";
+import { URL_LOCAL_HOST, PORT  } from "@env";
 
 const RecapitulatifAddVehicul = (props) => {
   const idUser = props.route.params.id;
@@ -19,6 +20,8 @@ const RecapitulatifAddVehicul = (props) => {
   const description = props.route.params.description;
   const boiteAvitesse = props.route.params.boiteAvitesse;
   const serie = props.route.params.serie;
+ 
+
 
   const onPress = () => {
     const data = {
@@ -30,7 +33,7 @@ const RecapitulatifAddVehicul = (props) => {
       body: JSON.stringify(data),
     };
 
-    // fetch('http://192.168.90.152:8083/detailUser', requestOptions)
+    // fetch(URL_LOCAL_HOST+":"+PORT+'/detailUser', requestOptions)
     //          .then(response => response.json())
     //          .then(data => {
     //              if (data.statutTO === "user") {

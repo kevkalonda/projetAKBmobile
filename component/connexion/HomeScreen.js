@@ -11,6 +11,7 @@ import {
 import IconFont from "react-native-vector-icons/FontAwesome5";
 import Icon from "react-native-vector-icons/Ionicons";
 import IconCom from "react-native-vector-icons/MaterialCommunityIcons";
+import { URL_LOCAL_HOST, PORT  } from "@env";
 
 const HomeScreen = (props) => {
   const [titleText, setTitleText] = useState("Home");
@@ -41,7 +42,7 @@ const HomeScreen = (props) => {
       //body: JSON.stringify(data),
     };
 
-    fetch("http://172.20.10.12:8083/vehicules", requestOptions)
+    fetch(URL_LOCAL_HOST+":"+PORT+"/vehicules", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         setNumbers(data);
