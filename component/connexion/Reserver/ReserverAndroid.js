@@ -23,6 +23,8 @@ export default function ReserverAndroid(props) {
     setVisibleTime(false);
   }, [setVisibleTime]);
 
+  const data = props.route.params.data;
+
   const onConfirmTime = React.useCallback(
     ({ hours, minutes }) => {
       setVisibleTime(false);
@@ -46,7 +48,7 @@ export default function ReserverAndroid(props) {
   };
 
   const recapReservation = () => {
-    props.navigation.navigate("Recapitulatif", { id: props.route.params.id });
+    props.navigation.navigate("Recapitulatif", { id: props.route.params.id, data: data });
   };
 
   const [Enable, setEnable] = useState("00");
@@ -68,7 +70,7 @@ export default function ReserverAndroid(props) {
   return (
     <View style={styles.container}>
       <Image
-        source={getUrl()}
+        source={{uri: data.descriptionvclTO}}
         style={{
           width: "100%",
           height: "30%",

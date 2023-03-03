@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 import { Text } from "react-native-paper";
-import { URL_LOCAL_HOST, PORT  } from "@env";
+import { URL_LOCAL_HOST, PORT } from "@env";
 
 const RecapitulatifAddVehicul = (props) => {
   const idUser = props.route.params.id;
@@ -20,33 +20,44 @@ const RecapitulatifAddVehicul = (props) => {
   const description = props.route.params.description;
   const boiteAvitesse = props.route.params.boiteAvitesse;
   const serie = props.route.params.serie;
- 
+
 
 
   const onPress = () => {
     const data = {
-      idcpt: null,
-    };
+      "idvcl": null,
+      "marquevcl": nomMarque,
+      "modelvcl": modele,
+      "serievcl": serie,
+      "typemoteurvcl": typeMoteur,
+      "reservoirvcl": reservoir,
+      "kmvcl": kmh,
+      "couleurvcl": "Blanc",
+      "descriptionvcl": "descriptionvcl",
+      "boitevitessevcl": boiteAvitesse,
+      "statutvcl": "libre",
+      "datemiseligne": new Date(),
+      "datedebutdisponibilite": "2023-02-28T20:42:24.000+00:00",
+      "datefindisponibilite": "2026-01-25T20:42:24.000+00:00",
+      "cautionvcl": Math.floor(Math.random() * 100) + 3000,
+      "prixvcl": Math.floor(Math.random() * 100) + 10,
+      "compte": null
+    }
     const requestOptions = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     };
 
-    // fetch(URL_LOCAL_HOST+":"+PORT+'/detailUser', requestOptions)
-    //          .then(response => response.json())
-    //          .then(data => {
-    //              if (data.statutTO === "user") {
-    //                 setMdp(data.mdpTO)
-    //                 setNom(data.nomusrTO)
-    //                 setPrenom(data.prenomusrTO)
-
-    //              }
-
-    //          });
-    props.navigation.navigate("Vehicule", {
-      id: idUser,
-    });
+    fetch(URL_LOCAL_HOST + '/ajoutVehicule', requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        if (data !== null) {
+          props.navigation.navigate("Vehicule", {
+            id: idUser,
+          });
+        }
+      });
   };
 
   return (

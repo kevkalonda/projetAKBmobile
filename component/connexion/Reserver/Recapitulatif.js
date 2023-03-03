@@ -17,6 +17,8 @@ const Recapitulatif = (props) => {
   const [prog, setProg] = useState(false);
   const [progClr, setProgClr] = useState("#000");
 
+  const data = props.route.params.data;
+
   const cliquer = () => {
     const data = {
       idcpt: null,
@@ -56,9 +58,9 @@ const Recapitulatif = (props) => {
           Recaputilatif reservation
         </Text>
         <View>
-          <Text style={{ alignSelf: "center" }}>Nom Vehicule</Text>
-          <Text style={{ alignSelf: "center" }}>Model</Text>
-          <Text style={{ alignSelf: "center" }}>Marque</Text>
+          <Text style={{ alignSelf: "center" }}>{data.marquevclTO + " " + data.modelvclTO}</Text>
+          <Text style={{ alignSelf: "center" }}>{data.modelvclTO}</Text>
+          <Text style={{ alignSelf: "center" }}>{data.marquevclTO}</Text>
 
           <View style={{ marginBottom: 15 }}>
             <View>
@@ -72,8 +74,21 @@ const Recapitulatif = (props) => {
           </View>
           <View>
             <View>
-              <Text>lieu du prise de vehicule</Text>
-              <Text>lieu du retour de vehicule</Text>
+              <View style={{
+                flexDirection: "row",
+                justifyContent: "space-arround",
+              }}>
+                <Text>lieu du prise de vehicule</Text>
+                <Text>12 rue Robespierres 29200 Brest France</Text>
+              </View>
+
+              <View style={{
+                flexDirection: "row",
+                justifyContent: "space-arround",
+              }}>
+                <Text>lieu du retour de vehicule</Text>
+                <Text>12 rue Robespierres 29200 Brest France</Text>
+              </View>
             </View>
           </View>
           <View
@@ -85,7 +100,7 @@ const Recapitulatif = (props) => {
             }}
           >
             <Text style={{ marginRight: 10 }}>Montant à payer</Text>
-            <Text>15000</Text>
+            <Text>{data.prixvclTO}</Text>
           </View>
           <View
             style={{

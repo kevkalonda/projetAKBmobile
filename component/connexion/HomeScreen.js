@@ -57,13 +57,14 @@ const HomeScreen = (props) => {
     }
   };
 
-  const redirectReserver = () => {
+  const redirectReserver = (number) => {
     console.log(props.route.params.id);
     if (Platform.OS === "ios") {
-      props.navigation.navigate("Reserver", { id: props.route.params.id });
+      props.navigation.navigate("Reserver", { id: props.route.params.id, data: number });
     } else {
       props.navigation.navigate("ReserverAndroid", {
         id: props.route.params.id,
+        data: number
       });
     }
   };
@@ -115,7 +116,7 @@ const HomeScreen = (props) => {
                 <Text>Prix : {number.prixvclTO} /Kmh</Text>
                 <TouchableOpacity
                   style={styles.button}
-                  onPress={redirectReserver}
+                  onPress={redirectReserver(number)}
                 >
                   <Text style={{ alignSelf: "center", fontWeight: "bold" }}>
                     Reserver

@@ -16,6 +16,7 @@ export default function Reserver(props) {
     var ico = "vehicule4.jpg";
     const getUrl = () => require('../../../assets/' + ico);
     const [date, setDate] = useState(new Date());
+    const data = props.route.params.data;
     
    
     const [visibleTime, setVisibleTime] = React.useState(false)
@@ -65,7 +66,7 @@ export default function Reserver(props) {
 
     return (
         <View style={styles.container}>
-            <Image source={getUrl()} style={{ width: "100%", height: "30%", marginBottom: 2, alignSelf: "center" }} />
+            <Image source={{uri: data.descriptionvclTO}} style={{ width: "100%", height: "30%", marginBottom: 2, alignSelf: "center" }} />
             <SafeAreaView style={styles.container2}>
                 <ScrollView >
                     <View style={{ marginTop: 30, flexDirection: "row", justifyContent: "space-around" }}>
