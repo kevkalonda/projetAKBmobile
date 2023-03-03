@@ -16,6 +16,7 @@ import AddVehiculeCarburant from './component/connexion/Vehicules/AddVehiculeCar
 import AddVehiculeAvantDernier from './component/connexion/Vehicules/AddVehiculeAvantDernier';
 import RecapitulatifAddVehicul from './component/connexion/Vehicules/RecapitulatifAddVehicul';
 import ModifierVehicule from './component/connexion/Vehicules/ModifierVehicule';
+import ReserverAndroid from './component/connexion/Reserver/ReserverAndroid'
 //import IconFont from 'react-native-vector-icons/FontAwesome';
 import React, { useState } from 'react';
 import { Platform, View,Image, TouchableOpacity, StyleSheet } from 'react-native';
@@ -65,6 +66,7 @@ export default function App() {
         <Stack.Screen name="AddVehiculeAvantDernier" component={AddVehiculeAvantDernier} options={{  title:'', headerBackTitle:"" }}/>
         <Stack.Screen name="RecapitulatifAddVehicul" component={RecapitulatifAddVehicul} options={{  title:'', headerBackTitle:"" }}/>
         <Stack.Screen name="ModifierVehicule" component={ModifierVehicule} options={{  title:'', headerBackTitle:"Mes publication" }}/>
+        <Stack.Screen name="ReserverAndroid" component={ReserverAndroid} options={{  title:'', headerBackTitle:"" }}/>
 
         <Stack.Screen name="Compte" component={Compte} options={{  title:'Données personnelles', headerBackTitle:"" }}/>
         <Stack.Screen name="Aide" component={Aide} options={{  title:'Aide', headerBackTitle:"" }}/>

@@ -8,8 +8,10 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  ScrollView,
+  SafeAreaView
 } from "react-native";
-import { URL_LOCAL_HOST, PORT  } from "@env";
+import { URL_LOCAL_HOST, PORT } from "@env";
 
 export default function Connexion(props) {
   const inputAccessoryViewID = "uniqueID";
@@ -30,7 +32,7 @@ export default function Connexion(props) {
         body: JSON.stringify({ email: compte, mot_de_pass: mdp }),
       };
 
-      fetch(URL_LOCAL_HOST+":"+PORT+"/connexionUser", requestOptions)
+      fetch(URL_LOCAL_HOST + ":" + PORT + "/connexionUser", requestOptions)
         .then((response) => response.json())
         .then((data) => {
           if (data.statutTO === "user") {
@@ -51,70 +53,78 @@ export default function Connexion(props) {
     props.navigation.navigate("MotDePasseOublier");
   };
   return (
-    <View style={styles.container}>
-      <Image
-        style={{
-          height: Platform.OS == "ios" ? 350 : 200,
-          width: Platform.OS == "ios" ? 350 : 200,
-        }}
-        source={require("../assets/AKB_menu.png")}
-      />
-      <TextInput
-        editable
-        style={styles.top}
-        inputAccessoryViewID={inputAccessoryViewID}
-        onChangeText={setCompte}
-        value={compte}
-        placeholder={"Entrez votre mail"}
-      />
+    <SafeAreaView style={styles.container}>
+      <ScrollView >
+        <View style={styles.container2}>
 
-      <TextInput
-        editable
-        style={styles.top}
-        inputAccessoryViewID={inputAccessoryViewID}
-        onChangeText={setMdp}
-        value={mdp}
-        secureTextEntry={true}
-        placeholder={"Entrez votre mot de passe"}
-      />
+          <Image
+            style={{
+              height: Platform.OS == "ios" ? 350 : 200,
+              width: Platform.OS == "ios" ? 350 : 200,
+            }}
+            source={require("../assets/AKB_menu.png")}
+          />
+          <TextInput
+            editable
+            style={styles.top}
+            inputAccessoryViewID={inputAccessoryViewID}
+            onChangeText={setCompte}
+            value={compte}
+            placeholder={"Entrez votre mail"}
+          />
 
-      <TouchableOpacity style={styles.button} onPress={connexion}>
-        <Text style={styles.textButton}>Connexion</Text>
-      </TouchableOpacity>
-      <View style={{ marginTop: 25, alignItems: "center" }}>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={{ color: "white" }}>
-            Mot de passe oublier ? cliquez{" "}
-          </Text>
-          <TouchableOpacity class="hover:bg-sky-700" onPress={mdpOublier}>
-            <Text style={{ color: "#676767", fontWeight: "bold" }}> ici</Text>
+          <TextInput
+            editable
+            style={styles.top}
+            inputAccessoryViewID={inputAccessoryViewID}
+            onChangeText={setMdp}
+            value={mdp}
+            secureTextEntry={true}
+            placeholder={"Entrez votre mot de passe"}
+          />
+
+          <TouchableOpacity style={styles.button} onPress={connexion}>
+            <Text style={styles.textButton}>Connexion</Text>
           </TouchableOpacity>
+          <View style={{ marginTop: 25, alignItems: "center" }}>
+            <View style={{ flexDirection: "row" }}>
+              <Text style={{ color: "white" }}>
+                Mot de passe oublier ? cliquez{" "}
+              </Text>
+              <TouchableOpacity class="hover:bg-sky-700" onPress={mdpOublier}>
+                <Text style={{ color: "#676767", fontWeight: "bold" }}> ici</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{ marginTop: 30, flexDirection: "row" }}>
+              <Text style={{ fontSize: 20, color: "white" }}>
+                Tu n'as pas de compte ?{" "}
+              </Text>
+              <TouchableOpacity class="hover:bg-sky-700" onPress={inscription}>
+                <Text
+                  style={{ fontSize: 20, color: "#676767", fontWeight: "bold" }}
+                >
+                  {" "}
+                  S'inscrire
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <StatusBar style="auto" />
         </View>
-        <View style={{ marginTop: 30, flexDirection: "row" }}>
-          <Text style={{ fontSize: 20, color: "white" }}>
-            Tu n'as pas de compte ?{" "}
-          </Text>
-          <TouchableOpacity class="hover:bg-sky-700" onPress={inscription}>
-            <Text
-              style={{ fontSize: 20, color: "#676767", fontWeight: "bold" }}
-            >
-              {" "}
-              S'inscrire
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <StatusBar style="auto" />
-    </View>
+      </ScrollView>
+    </SafeAreaView>
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#e07b7b",
+  },
+  container2: {
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#e07b7b",
     justifyContent: "center",
   },
   top: {

@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, TextInput, StyleSheet, Image, Platform } from 'react-native';
+import { Text, View, ScrollView, SafeAreaView, StyleSheet, Image, Platform } from 'react-native';
 
 export default function Aide(props) {
 

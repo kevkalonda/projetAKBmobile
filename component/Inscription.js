@@ -9,13 +9,16 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  ScrollView,
+  SafeAreaView
 } from "react-native";
 import { DatePickerModal } from "react-native-paper-dates";
 import Icon from "react-native-vector-icons/Ionicons";
-import { URL_LOCAL_HOST, PORT  } from "@env";
+import { URL_LOCAL_HOST, PORT } from "@env";
 
 LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
+
 export default function Inscription(props) {
   const inputAccessoryViewID = "uniqueID";
   const initialText = "";
@@ -67,7 +70,7 @@ export default function Inscription(props) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
         };
-        fetch(URL_LOCAL_HOST+":"+PORT+"/inscriptionUtilisateur",
+        fetch(URL_LOCAL_HOST + ":" + PORT + "/inscriptionUtilisateur",
           requestOptions
         )
           .then((response) => response.json())
@@ -95,178 +98,195 @@ export default function Inscription(props) {
   };
 
   return (
-    <View style={styles.container}>
-      {Platform.OS == "ios" ? (
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Text
-            style={{
-              color: "black",
-              alignSelf: "center",
-              fontSize: 20,
-              marginLeft: 15,
-              fontWeight: "bold",
-            }}
-          >
-            Civilité
-          </Text>
-          <Picker
-            selectedValue={Enable}
-            style={{ height: 200, width: "65%", color: "white" }}
-            onValueChange={(itemValue) => setEnable(itemValue)}
-          >
-            <Picker.Item label="Madame" value="F" />
-            <Picker.Item label="Monsieur" value="M" />
-          </Picker>
-        </View>
-      ) : (
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Text
-            style={{
-              color: "white",
-              alignSelf: "center",
-              fontSize: 15,
-              marginLeft: 10,
-            }}
-          >
-            Civilité
-          </Text>
-          <Picker
-            selectedValue={Enable}
-            style={{ height: 200, width: "60%", color: "white" }}
-            onValueChange={(itemValue) => setEnable(itemValue)}
-          >
-            <Picker.Item label="Madame" value="F" />
-            <Picker.Item label="Monsieur" value="M" />
-          </Picker>
-        </View>
-      )}
-      {Platform.OS == "ios" ? (
-        <View>
-          <DatePickerModal
-            mode="single"
-            visible={visible}
-            onDismiss={onDismiss}
-            date={date}
-            onConfirm={onChange}
-            saveLabel="Enregistrer" // optional
-            label="Selectionner une date" // optional
-            locale={"fr"}
-            animationType="slide"
-            // optional, default is 'slide' on ios/android and 'none' on web
-          />
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-around" }}
-          >
-            <Text
-              style={{
-                fontSize: 15,
-                fontWeight: "bold",
-                alignSelf: "baseline",
-                marginRight: "20%",
-              }}
-            >
-              Selectionner une Date
-            </Text>
-            <TouchableOpacity
-              onPress={updateDate}
-              style={{ alignSelf: "baseline" }}
-            >
-              <View
+    <SafeAreaView style={styles.container}>
+      <ScrollView >
+        <View style={styles.container2}>
+          {Platform.OS == "ios" ? (
+            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+              <Text
                 style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
+                  color: "black",
+                  alignSelf: "center",
+                  fontSize: 20,
+                  marginLeft: 15,
+                  fontWeight: "bold",
                 }}
               >
-                <Text style={{ alignSelf: "center", marginRight: 5 }}>
-                  {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}
+                Civilité
+              </Text>
+              <Picker
+                selectedValue={Enable}
+                style={{ height: 200, width: "65%", color: "white" }}
+                onValueChange={(itemValue) => setEnable(itemValue)}
+              >
+                <Picker.Item label="Madame" value="F" />
+                <Picker.Item label="Monsieur" value="M" />
+              </Picker>
+            </View>
+          ) : (
+            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+              <Text
+                style={{
+                  color: "white",
+                  alignSelf: "center",
+                  fontSize: 15,
+                  marginLeft: 10,
+                }}
+              >
+                Civilité
+              </Text>
+              <Picker
+                selectedValue={Enable}
+                style={{ height: 200, width: "60%", color: "white" }}
+                onValueChange={(itemValue) => setEnable(itemValue)}
+              >
+                <Picker.Item label="Madame" value="F" />
+                <Picker.Item label="Monsieur" value="M" />
+              </Picker>
+            </View>
+          )}
+          {Platform.OS == "ios" ? (
+            <View>
+              <DatePickerModal
+                mode="single"
+                visible={visible}
+                onDismiss={onDismiss}
+                date={date}
+                onConfirm={onChange}
+                saveLabel="Enregistrer" // optional
+                label="Selectionner une date" // optional
+                locale={"fr"}
+                animationType="slide"
+              // optional, default is 'slide' on ios/android and 'none' on web
+              />
+              <View
+                style={{ flexDirection: "row", justifyContent: "space-around" }}
+              >
+                <Text
+                  style={{
+                    fontSize: 15,
+                    fontWeight: "bold",
+                    alignSelf: "baseline",
+                    marginRight: "20%",
+                  }}
+                >
+                  Selectionner une Date
                 </Text>
-                <Icon
-                  name="calendar-outline"
-                  size={35}
-                  style={{ alignSelf: "center" }}
-                />
+                <TouchableOpacity
+                  onPress={updateDate}
+                  style={{ alignSelf: "baseline" }}
+                >
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text style={{ alignSelf: "center", marginRight: 5 }}>
+                      {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}
+                    </Text>
+                    <Icon
+                      name="calendar-outline"
+                      size={35}
+                      style={{ alignSelf: "center" }}
+                    />
+                  </View>
+                </TouchableOpacity>
               </View>
-            </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
+              <Text style={{ fontSize: 15, fontWeight: "bold", alignSelf: "center" }}>Date de naissance</Text>
+              <TextInput
+                style={styles.input3}
+                inputAccessoryViewID={inputAccessoryViewID}
+                onChangeText={setNom}
+                value={nom}
+                placeholder={'JJ/MM/AAAA'}
+
+              />
+            </View>
+          )}
+
+          <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <TextInput
+              editable
+              style={styles.input2}
+              inputAccessoryViewID={inputAccessoryViewID}
+              onChangeText={setNom}
+              value={nom}
+              placeholder={"Nom"}
+            />
+            <TextInput
+              editable
+              style={styles.input2}
+              inputAccessoryViewID={inputAccessoryViewID}
+              onChangeText={setPrenom}
+              value={prenom}
+              placeholder={"Prenom"}
+            />
           </View>
-        </View>
-      ) : (
-        <View></View>
-      )}
 
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        <TextInput
-          editable
-          style={styles.input2}
-          inputAccessoryViewID={inputAccessoryViewID}
-          onChangeText={setNom}
-          value={nom}
-          placeholder={"Nom"}
-        />
-        <TextInput
-          editable
-          style={styles.input2}
-          inputAccessoryViewID={inputAccessoryViewID}
-          onChangeText={setPrenom}
-          value={prenom}
-          placeholder={"Prenom"}
-        />
-      </View>
-
-      <TextInput
-        editable
-        style={styles.top}
-        inputAccessoryViewID={inputAccessoryViewID}
-        onChangeText={setMail}
-        value={mail}
-        placeholder={"mail"}
-      />
-      <TextInput
-        editable
-        style={styles.top}
-        inputAccessoryViewID={inputAccessoryViewID}
-        onChangeText={setMdp1}
-        value={mdp1}
-        secureTextEntry={true}
-        placeholder={"Mot de passe"}
-      />
-      <TextInput
-        editable
-        style={styles.top}
-        inputAccessoryViewID={inputAccessoryViewID}
-        onChangeText={setMdp2}
-        value={mdp2}
-        secureTextEntry={true}
-        placeholder={"Confirmation mot de passe"}
-      />
-      <TouchableOpacity style={styles.button} onPress={onPress}>
-        <Text style={styles.textButton}>S'inscrire</Text>
-      </TouchableOpacity>
-      <View style={{ marginTop: 25, alignItems: "center" }}>
-        <View style={{ marginTop: 30, flexDirection: "row" }}>
-          <Text style={{ fontSize: 20, color: "white" }}>
-            Tu as déjà un compte ?{" "}
-          </Text>
-          <TouchableOpacity onPress={retourConexion}>
-            <Text
-              style={{ fontSize: 20, color: "#676767", fontWeight: "bold" }}
-            >
-              {" "}
-              se connecter
-            </Text>
+          <TextInput
+            editable
+            style={styles.top}
+            inputAccessoryViewID={inputAccessoryViewID}
+            onChangeText={setMail}
+            value={mail}
+            placeholder={"mail"}
+          />
+          <TextInput
+            editable
+            style={styles.top}
+            inputAccessoryViewID={inputAccessoryViewID}
+            onChangeText={setMdp1}
+            value={mdp1}
+            secureTextEntry={true}
+            placeholder={"Mot de passe"}
+          />
+          <TextInput
+            editable
+            style={styles.top}
+            inputAccessoryViewID={inputAccessoryViewID}
+            onChangeText={setMdp2}
+            value={mdp2}
+            secureTextEntry={true}
+            placeholder={"Confirmation mot de passe"}
+          />
+          <TouchableOpacity style={styles.button} onPress={onPress}>
+            <Text style={styles.textButton}>S'inscrire</Text>
           </TouchableOpacity>
+          <View style={{ marginTop: 25, alignItems: "center" }}>
+            <View style={{ marginTop: 30, flexDirection: "row" }}>
+              <Text style={{ fontSize: 20, color: "white" }}>
+                Tu as déjà un compte ?{" "}
+              </Text>
+              <TouchableOpacity onPress={retourConexion}>
+                <Text
+                  style={{ fontSize: 20, color: "#676767", fontWeight: "bold" }}
+                >
+                  {" "}
+                  se connecter
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <StatusBar style="auto" />
         </View>
-      </View>
-      <StatusBar style="auto" />
-    </View>
+      </ScrollView>
+    </SafeAreaView>
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#e07b7b",
+  },
+  container2: {
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#e07b7b",
     justifyContent: "center",
   },
   top: {
@@ -294,6 +314,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     textAlign: "center",
     justifyContent: "center",
+  },
+
+  input3: {
+    width: '40%',
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderRadius: 3,
+    marginTop: 10,
+    padding: 8,
+    marginLeft: "18%",
   },
   button: {
     width: "90%",

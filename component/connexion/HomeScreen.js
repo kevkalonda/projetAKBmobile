@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   Image,
+  Platform,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -59,7 +60,13 @@ const HomeScreen = (props) => {
 
   const redirectReserver = () => {
     console.log(props.route.params.id);
-    props.navigation.navigate("Reserver", { id: 255 });
+    if(Platform.OS==="ios"){
+      props.navigation.navigate("Reserver", { id: 255 });
+    }else{
+      props.navigation.navigate("ReserverAndroid", { id: 255 });
+    }
+    
+    
   };
 
   const [numbers, setNumbers] = React.useState([]);
